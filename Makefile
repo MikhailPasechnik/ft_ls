@@ -13,26 +13,23 @@ CC=gcc
 CC_FLAGS=-Wall -Wextra -Werror
 
 OBJ=$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
-HOBJ=$(addprefix $(OBJ_DIR)/, $(HEADERS:.h=.h.gch))
+HEADERS_FILES=$(addprefix $(INC_DIR)/, $(HEADERS))
 LIBS=-L$(LIBFT_DIR) -lft
-INCLUDES=-I $(LIBFT_DIR) -I $(INC_DIR) -I $(OBJ_DIR)
+INCLUDES=-I $(LIBFT_DIR) -I $(INC_DIR)
 TEST_NAMES=
 TEST_SRC:=$(shell find src/ -maxdepth 1 -type f \( -regex ".*\.c" ! -name "main.c" \))
 
 all: $(NAME)
 
-$(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
-
-$(OBJ_DIR)/%.h.gch:$(INC_DIR)/%.h
+$(OBJ_DIR)/%.o:$(SRC_DIR)/%.c $(HEADERS_FILES)
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
 
 $(LIBFT): FAKE
 	@$(MAKE) -C $(LIBFT_DIR)/ --no-print-directory
 
-$(NAME): $(LIBFT) $(HOBJ) $(OBJ)
+$(NAME): $(LIBFT) $(OBJ)
+	$(info Compile $(NAME))
 	@$(CC)  $(CC_FLAGS) -o $(NAME) $(OBJ) $(INCLUDES) $(LIBS);
 
 clean :
