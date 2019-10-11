@@ -5,6 +5,7 @@ int		list_dir(char *dir_name, unsigned int flags)
 {
 	struct dirent	*ent;
 	t_file			*list;
+	t_file			*tmp;
 	t_file			**it;
 	t_list_layout	layout;
 	DIR				*dir;
@@ -25,7 +26,11 @@ int		list_dir(char *dir_name, unsigned int flags)
 	while (list)
 	{
 		put_list_file(list, &layout, flags);
+		if (flags & LSF_DD && S_ISDIR(list->stat.st_mode) && !IS_CD(list->name) && !IS_UP(list->name))
+			list_dir(list->file_name, flags);
+		tmp = list;
 		list = list->next;
+		free(tmp);
 	}
 	return (1);
 }
@@ -33,13 +38,6 @@ int		list_dir(char *dir_name, unsigned int flags)
 
 int main(int argc, char **argv)
 {
-	struct stat 	st;
-	if (lstat("./libft/Makefile", &st) < 0)
-	{
-		int err = errno;
-//		fft_printf(stderr, "%s", explain_errno_lstat(err, "./libft/Makefile", &st));
-		exit(EXIT_FAILURE);
-	}
 	list_dir("/", 0);
 	(void)argv;
 	(void)argc;
