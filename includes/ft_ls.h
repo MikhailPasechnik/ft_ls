@@ -1,6 +1,7 @@
 #ifndef FT_LS_H
 #define FT_LS_H
 # include "libft.h"
+# include "ft_printf.h"
 
 # include <time.h>
 # include <pwd.h>
@@ -13,13 +14,8 @@
 # include <sys/acl.h>
 # include <sys/xattr.h>
 # include <sys/ioctl.h>
-#include <time.h>
-#include <assert.h>
-#include <errno.h>
-
-
-# include <stdio.h> // TODO: Use ft_printf
-# define ft_printf printf
+# include <time.h>
+# include <errno.h>
 
 # define LS_STATUSOK 0
 # define LS_STATUSMP 1
