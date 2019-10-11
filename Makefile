@@ -1,56 +1,65 @@
-NAME=ft_ls
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: caellis <caellis@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/03/11 15:11:22 by bnesoi            #+#    #+#              #
+#    Updated: 2019/08/23 13:27:56 by caellis          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-OS			:=	$(shell uname -s)
-SRC			:=	main.c
-HEADERS		:=  ft_ls.h
-LIBFT		=	./libft/libft.a
-LIBFT_DIR	=	./libft
-INC_DIR		=	./includes
-OBJ_DIR		=	./obj
-SRC_DIR		=	./src
+NAME=libftprintf.a
+
+INC_DIR=./include
+OBJ_DIR=./obj
+SRC_DIR=./src
+
+SRC_FILES=\
+	ft_printf.c			\
+	pf_parse.c			\
+	pf_put.c			\
+	pf_put_char.c		\
+	pf_put_int.c	    \
+	pf_put_float.c		\
+	pf_put_empty.c		\
+	pf_put_string.c		\
+	pf_put_prefix.c		\
+	pf_put_ptr.c		\
+	pf_atoi.c		    \
+	pf_long_math.c	    \
+	pf_strreverse.c		\
+	pf_util.c			\
+	pf_util_2.c
+HDR_FILES=\
+	ft_printf.h
+
+HDR=$(addprefix $(INC_DIR)/, $(HDR_FILES))
+OBJ=$(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
+SRC=$(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
 CC=gcc
-CC_FLAGS=-Wall -Wextra -Werror
-
-OBJ=$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
-HEADERS_FILES=$(addprefix $(INC_DIR)/, $(HEADERS))
-LIBS=-L$(LIBFT_DIR) -lft
-INCLUDES=-I $(LIBFT_DIR) -I $(INC_DIR)
-TEST_NAMES=
-TEST_SRC:=$(shell find src/ -maxdepth 1 -type f \( -regex ".*\.c" ! -name "main.c" \))
+CC_FLAGS= -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(OBJ_DIR)/%.o:$(SRC_DIR)/%.c $(HEADERS_FILES)
+$(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
 
-$(LIBFT): FAKE
-	@$(MAKE) -C $(LIBFT_DIR)/ --no-print-directory
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HDR)
+	$(CC) $(CC_FLAGS) -I $(INC_DIR) -o $@ -c $<
 
-$(NAME): $(LIBFT) $(OBJ)
-	$(info Compile $(NAME))
-	@$(CC)  $(CC_FLAGS) -o $(NAME) $(OBJ) $(INCLUDES) $(LIBS);
+$(NAME): $(OBJ_DIR) $(OBJ)
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
 
 clean :
 	@/bin/rm -rf $(OBJ_DIR)
-	@make clean -C $(info $(OS))$(LIBFT_DIR) --no-print-directory
 
 fclean : clean
-	@/bin/rm -f $(NAME) $(addprefix tests/test_,$(FILE_NAMES))
-	@make fclean -C $(LIBFT_DIR) --no-print-directory
-	@/bin/rm -f $(addprefix tests/,$(TEST_NAMES))
+	@/bin/rm -f $(NAME)
 
 re : fclean all
 
-test-all:
-	@for s in $(TEST_NAMES) ; do \
-		$(MAKE) test name=$$s --no-print-directory;\
-	done
-
-test: $(LIBFT)
-	@gcc  $(CC_FLAGS) $(INCLUDES) $(TEST_SRC) tests/$(name).c $(LIBS) -o tests/$(name);
-	$(info ************ $(name) *************)
-	@tests/$(name)
-
-.PHONY: FAKE
+.PHONY: -

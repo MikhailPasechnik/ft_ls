@@ -52,5 +52,13 @@ Mkfile.old
 dkms.conf
 
 # Jet
-cmake-build-debug
 .idea
+cmake-build-*
+
+# Libft
+/tests/libft/
+
+# Unit-tests
+/tests/unit_test
+/tests/cirqui_test
+.vscode
