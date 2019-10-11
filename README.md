@@ -1,3 +1,9 @@
+*TODO*:
+- parsing
+- flags
+- sorting
+- non list display 
+
 Within your mandatory part you are allowed to use the following functions:
 
 - write
