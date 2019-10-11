@@ -24,6 +24,8 @@
 # define LSE_NODIR 0
 
 # define MAX(a, b)((a) > (b) ? (a) : (b))
+# define IS_CD(s)(((s)[0] == '.' && (s)[1] == '\0'))
+# define IS_UP(s)(((s)[0] == '.' && (s)[1] == '.' && (s)[2] == '\0'))
 
 # define LSF_RR (1u << 0u)
 # define LSF_L (1u << 1u)
