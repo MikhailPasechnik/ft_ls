@@ -19,3 +19,35 @@ int		ls_put_error(int error, char *dir_name, int returns)
 		ft_printf(LSE_NODIR_S, dir_name);
 	return (returns);
 }
+
+int		display_help()
+{
+	ft_printf(
+	"Usage: ft_ls [OPTION]... [FILE]...\n"
+    "List information about the FILEs (the current directory by default).\n"
+    "Sort entries alphabetically if none of -tu nor --sort is specified.\n\n"
+	"  -l      use a long listing format\n"
+    "  -R      list subdirectories recursively\n"
+	"  -a      do not ignore entries starting with .\n"
+    "  -r      reverse order while sorting\n"
+	"  -t      sort by modification time, newest first\n"
+    "  -u      with -lt: sort by, and show, access time;\n"
+	"            with -l: show access time and sort by name;\n"
+	"            otherwise: sort by access time, newest first\n"
+	"  -f      do not sort\n"
+    "  -g      like -l, but do not list owner\n"
+	"  -d      list directories themselves, not their contents\n"
+    "  -1      list one file per line.\n"
+	"  --help  display this help and exit\n"
+	);
+	exit(LS_STATUSOK);
+}
+
+int	unrecognized_option(char *option, size_t len)
+{
+	ft_printf(
+	"ls: unrecognized option '%.*s'\n"
+	"Try 'ft_ls --help' for more information.\n",
+	len, option);
+	exit(LS_STATUSST);
+}

@@ -27,15 +27,20 @@
 # define IS_CD(s)(((s)[0] == '.' && (s)[1] == '\0'))
 # define IS_UP(s)(((s)[0] == '.' && (s)[1] == '.' && (s)[2] == '\0'))
 
-# define LSF_RR (1u << 0u)
-# define LSF_L (1u << 1u)
-# define LSF_A (1u << 2u)
-# define LSF_R (1u << 3u)
-# define LSF_T (1u << 4u)
-# define LSF_U (1u << 5u)
-# define LSF_F (1u << 6u)
-# define LSF_G (1u << 7u)
-# define LSF_DD (1u << 8u)
+# define LSF_ALL "lRartugd1"
+
+# define LSF_L     (1u << 0u)
+# define LSF_RR    (1u << 1u)
+# define LSF_A     (1u << 2u)
+# define LSF_R     (1u << 3u)
+# define LSF_T     (1u << 4u)
+# define LSF_U     (1u << 5u)
+# define LSF_F     (1u << 6u)
+# define LSF_G     (1u << 7u)
+# define LSF_D     (1u << 8u)
+# define LSF_1     (1u << 9u)
+# define LSF_HELP  (1u << 10u)
+# define LSF_MULTI  (1u << 11u)
 
 typedef struct	s_list_layout
 {
@@ -81,11 +86,18 @@ void			update_layout(t_file *file, t_list_layout *l);
 */
 int				int_len(int n);
 int				ls_put_error(int error, char *dir_name, int returns);
+int				display_help();
+int				unrecognized_option(char *option, size_t len);
 
 /*
 ** Print functions
 */
 void			put_list_file(t_file *file, t_list_layout *lay,
 		unsigned int flags);
+
+/*
+** Parse
+*/
+int		parse_options(char *options, unsigned int *flags);
 
 #endif
