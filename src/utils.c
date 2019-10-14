@@ -13,10 +13,9 @@ int		int_len(int n)
 	return (len);
 }
 
-int		ls_put_error(int error, char *dir_name, int returns)
+int		ls_put_error(char *error, char *dir_name, int returns)
 {
-	if (error == LSE_NODIR)
-		ft_printf(LSE_NODIR_S, dir_name);
+	ft_printf(error, dir_name);
 	return (returns);
 }
 

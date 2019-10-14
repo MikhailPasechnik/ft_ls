@@ -20,8 +20,7 @@
 # define LS_STATUSOK 0
 # define LS_STATUSMP 1
 # define LS_STATUSST 2
-# define LSE_NODIR_S "ft_ls: cannot access '%s': No such file or directory\n"
-# define LSE_NODIR 0
+# define LSE_NODIR "ft_ls: cannot access '%s': No such file or directory\n"
 
 # define MAX(a, b)((a) > (b) ? (a) : (b))
 # define IS_CD(s)(((s)[0] == '.' && (s)[1] == '\0'))
@@ -85,7 +84,7 @@ void			update_layout(t_file *file, t_list_layout *l);
 ** Utils
 */
 int				int_len(int n);
-int				ls_put_error(int error, char *dir_name, int returns);
+int				ls_put_error(char *error, char *dir_name, int returns);
 int				display_help();
 int				unrecognized_option(char *option, size_t len);
 
