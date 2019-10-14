@@ -16,7 +16,7 @@ int		list_dir(char *dir_name, unsigned int flags)
 	it = &list;
 	ft_bzero(&layout, sizeof(layout));
 	while ((ent = readdir (dir)) != NULL) {
-		if (new_file(dir_name, ent, it, 1))
+		if (new_file(dir_name, ent, it))
 		{
 			update_layout(*it, &layout);
 			it = &(*it)->next;

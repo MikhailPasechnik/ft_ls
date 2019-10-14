@@ -63,7 +63,7 @@ struct			s_file
 ** File struct functions
 */
 int				new_file(const char dir_name[PATH_MAX],
-		const struct dirent *ent, t_file **file, int stat);
+		const struct dirent *ent, t_file **file);
 
 /*
 ** File info
