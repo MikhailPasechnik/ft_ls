@@ -1,6 +1,6 @@
 #include "ft_ls.h"
 
-
+// TODO: Simplify!
 int		list_dir(char *dir_name, unsigned int flags)
 {
 	struct dirent	*ent;
@@ -23,13 +23,22 @@ int		list_dir(char *dir_name, unsigned int flags)
 		}
 	}
 	sort_list(&list, flags);
-	flags & LSF_MULTI ? ft_printf("%s:\n", dir_name) : 0;
+	flags & LSF_MULTI || flags & LSF_RR ? ft_printf("%s:\n", dir_name) : 0;
 	ft_printf("total %d\n", layout.st_blocks_sum);
+	tmp = list;
 	while (list)
 	{
 		put_list_file(list, &layout, flags);
+		list = list->next;
+	}
+	list = tmp;
+	while (list && flags & LSF_RR)
+	{
 		if (flags & LSF_RR && S_ISDIR(list->stat.st_mode) && !IS_CD(list->name) && !IS_UP(list->name))
+		{
+			ft_printf("\n");
 			list_dir(list->file_name, flags);
+		}
 		tmp = list;
 		list = list->next;
 		free(tmp);
