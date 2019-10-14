@@ -26,14 +26,14 @@
 # define IS_CD(s)(((s)[0] == '.' && (s)[1] == '\0'))
 # define IS_UP(s)(((s)[0] == '.' && (s)[1] == '.' && (s)[2] == '\0'))
 
-# define LSF_ALL "lRartugd1"
 
+# define LSF_ALL "lRartSgd1"
 # define LSF_L     (1u << 0u)
 # define LSF_RR    (1u << 1u)
 # define LSF_A     (1u << 2u)
 # define LSF_R     (1u << 3u)
 # define LSF_T     (1u << 4u)
-# define LSF_U     (1u << 5u)
+# define LSF_S     (1u << 5u)
 # define LSF_F     (1u << 6u)
 # define LSF_G     (1u << 7u)
 # define LSF_D     (1u << 8u)
