@@ -100,4 +100,9 @@ void			put_list_file(t_file *file, t_list_layout *lay,
 */
 int		parse_options(char *options, unsigned int *flags);
 
+/*
+** Sort
+*/
+void	sort_list(t_file **list, unsigned int flags);
+
 #endif

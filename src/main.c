@@ -22,6 +22,7 @@ int		list_dir(char *dir_name, unsigned int flags)
 			it = &(*it)->next;
 		}
 	}
+	sort_list(&list, flags);
 	flags & LSF_MULTI ? ft_printf("%s:\n", dir_name) : 0;
 	ft_printf("total %d\n", layout.st_blocks_sum);
 	while (list)
