@@ -7,7 +7,9 @@ static int		name_cmp(t_file *a, t_file *b)
 
 static int		size_cmp(t_file *a, t_file *b)
 {
-	return (a->stat.st_size > b->stat.st_size ? -1 : 1);
+	if (a->stat.st_size != b->stat.st_size)
+		return (a->stat.st_size > b->stat.st_size ? -1 : 1);
+	return (name_cmp(a, b));
 }
 
 static int		time_cmp(t_file *a, t_file *b)
@@ -20,15 +22,20 @@ static int		time_cmp(t_file *a, t_file *b)
 }
 
 
-static void		swap(t_file *p, t_file *a, t_file *b)
+static void		swap(t_file *p, t_file **a, t_file **b)
 {
+	t_file	*tmp;
+
 	if (a == NULL || b == NULL)
 		return;
 
-	a->next = b->next;
-	b->next = a;
+	(*a)->next = (*b)->next;
+	(*b)->next = *a;
 	if (p)
-		p->next = b;
+		p->next = *b;
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
 
 static void			reverse_list(t_file **list)
@@ -54,6 +61,16 @@ static void			reverse_list(t_file **list)
 }
 
 
+void print_list(t_file *list)
+{
+	while (list)
+	{
+		ft_printf("%s -> ", list->name);
+		list = list->next;
+	}
+	ft_printf("\n");
+}
+
 static void		bubble_sort(t_file **list, int (*cmp)(t_file *, t_file *))
 {
 	int		i;
@@ -74,10 +91,11 @@ static void		bubble_sort(t_file **list, int (*cmp)(t_file *, t_file *))
 		while (b && i++ != end)
 		{
 			if (cmp(a, b) > 0)
-				swap(p, a, b);
+				swap(p, &a, &b);
+			*list = i == 1 && *list == b ? a : *list; //TODO: Why?...
 			p = a;
 			a = b;
-			b = a->next;
+			b = b->next;
 		}
 		end = end == -1 ? i : end - 1;
 	}
