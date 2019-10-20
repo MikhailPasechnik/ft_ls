@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   file_info.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bnesoi <bnesoi@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/20 19:13:50 by bnesoi            #+#    #+#             */
+/*   Updated: 2019/10/20 19:46:21 by bnesoi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 
-static inline char			get_type_char(mode_t mode)
+static inline char	get_type_char(mode_t mode)
 {
 	char	type;
 
@@ -24,8 +36,7 @@ static inline char			get_type_char(mode_t mode)
 	return (type);
 }
 
-
-inline char					*get_chmod_str(char *str, mode_t mode)
+inline char			*get_chmod_str(char *str, mode_t mode)
 {
 	str[0] = get_type_char(mode);
 	str[1] = (mode & S_IRUSR) ? 'r' : '-';
@@ -49,8 +60,7 @@ inline char					*get_chmod_str(char *str, mode_t mode)
 	return (str);
 }
 
-
-int		full_path(
+int					full_path(
 		const char dir_name[PATH_MAX],
 		const char name[NAME_MAX + 1],
 		char result[PATH_MAX])
@@ -61,7 +71,7 @@ int		full_path(
 	if (i < PATH_MAX)
 	{
 		ft_strncpy(result, dir_name, i);
-		if (!(i == 1 && *dir_name == '/' ))
+		if (!(i == 1 && *dir_name == '/'))
 			result[i++] = '/';
 		while (*name && i < PATH_MAX)
 			result[i++] = *name++;
@@ -75,26 +85,28 @@ int		full_path(
 	return (0);
 }
 
-inline char *get_time_str(char str[12], time_t time)
+inline char			*get_time_str(char str[12], time_t time)
 {
 	ft_strncpy(str, ctime(&time) + 4, 12);
 	return (str);
 }
 
-void update_layout(t_file *file, t_list_layout *l)
+void				update_layout(t_file *file, t_list_layout *l)
 {
 	l->st_blocks = MAX(int_len(file->stat.st_blocks), l->st_blocks);
 	l->st_nlink = MAX(int_len(file->stat.st_nlink), l->st_nlink);
-	l->pw_name = MAX(ft_strlen(getpwuid(file->stat.st_uid)->pw_name), l->pw_name);
-	l->gr_name = MAX(ft_strlen(getgrgid(file->stat.st_gid)->gr_name), l->gr_name);
+	l->pw_name = MAX(ft_strlen(
+		getpwuid(file->stat.st_uid)->pw_name), l->pw_name);
+	l->gr_name = MAX(ft_strlen(
+		getgrgid(file->stat.st_gid)->gr_name), l->gr_name);
 	if (!S_ISCHR(file->stat.st_mode))
 		l->st_size = MAX(int_len(file->stat.st_size), l->st_size);
 	else
 	{
 		l->st_rdev_major = MAX(int_len(major(file->stat.st_rdev)),
-							   l->st_rdev_major);
+							l->st_rdev_major);
 		l->st_rdev_minor = MAX(int_len(minor(file->stat.st_rdev)),
-							   l->st_rdev_minor);
+							l->st_rdev_minor);
 	}
 	l->st_blocks_sum += file->stat.st_blocks;
 }

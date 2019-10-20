@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bnesoi <bnesoi@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/20 19:12:42 by bnesoi            #+#    #+#             */
+/*   Updated: 2019/10/20 19:12:51 by bnesoi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 
-static int char_at(const char *s, char c)
+static int	char_at(const char *s, char c)
 {
 	int		i;
 
@@ -14,7 +26,7 @@ static int char_at(const char *s, char c)
 	return (-1);
 }
 
-int		parse_options(char *options, unsigned int *flags)
+int			parse_options(char *options, unsigned int *flags)
 {
 	int		i;
 	int		at;

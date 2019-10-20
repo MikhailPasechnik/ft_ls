@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bnesoi <bnesoi@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/20 19:02:18 by bnesoi            #+#    #+#             */
+/*   Updated: 2019/10/20 19:11:55 by bnesoi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 
 static int		name_cmp(t_file *a, t_file *b)
@@ -14,21 +26,24 @@ static int		size_cmp(t_file *a, t_file *b)
 
 static int		time_cmp(t_file *a, t_file *b)
 {
-	if (a->stat.st_mtim.tv_sec != b->stat.st_mtim.tv_sec)
-		return (a->stat.st_mtim.tv_sec > b->stat.st_mtim.tv_sec ? -1 : 1);
-	if (a->stat.st_mtim.tv_nsec != b->stat.st_mtim.tv_nsec)
-		return (a->stat.st_mtim.tv_nsec > b->stat.st_mtim.tv_nsec ? -1 : 1);
-	return (0);
-}
+	int cmp_;
 
+	cmp_ = 0;
+	if (a->stat.st_mtimespec.tv_sec != b->stat.st_mtimespec.tv_sec)
+		cmp_ = a->stat.st_mtimespec.tv_sec >
+			b->stat.st_mtimespec.tv_sec ? -1 : 1;
+	if (a->stat.st_mtimespec.tv_nsec != b->stat.st_mtimespec.tv_nsec)
+		cmp_ = a->stat.st_mtimespec.tv_nsec >
+			b->stat.st_mtimespec.tv_nsec ? -1 : 1;
+	return (cmp_);
+}
 
 static void		swap(t_file *p, t_file **a, t_file **b)
 {
 	t_file	*tmp;
 
 	if (a == NULL || b == NULL)
-		return;
-
+		return ;
 	(*a)->next = (*b)->next;
 	(*b)->next = *a;
 	if (p)
@@ -38,11 +53,11 @@ static void		swap(t_file *p, t_file **a, t_file **b)
 	*b = tmp;
 }
 
-static void			reverse_list(t_file **list)
+static void		reverse_list(t_file **list)
 {
-	t_file *third;
-	t_file *second;
-	t_file *first;
+	t_file	*third;
+	t_file	*second;
+	t_file	*first;
 
 	if (!list || !(first = *list) || !(first->next))
 		return ;
@@ -60,8 +75,7 @@ static void			reverse_list(t_file **list)
 	*list = second;
 }
 
-
-void print_list(t_file *list)
+void			print_list(t_file *list)
 {
 	while (list)
 	{
@@ -80,19 +94,17 @@ static void		bubble_sort(t_file **list, int (*cmp)(t_file *, t_file *))
 	t_file	*p;
 
 	end = -1;
-	while (42)
+	while (42 && end != 0)
 	{
 		i = 0;
 		p = NULL;
 		a = *list;
 		b = a->next;
-		if (end == 0)
-			break ;
 		while (b && i++ != end)
 		{
 			if (cmp(a, b) > 0)
 				swap(p, &a, &b);
-			*list = i == 1 && *list == b ? a : *list; //TODO: Why?...
+			*list = i == 1 && *list == b ? a : *list;
 			p = a;
 			a = b;
 			b = b->next;
@@ -100,7 +112,6 @@ static void		bubble_sort(t_file **list, int (*cmp)(t_file *, t_file *))
 		end = end == -1 ? i : end - 1;
 	}
 }
-
 
 void	sort_list(t_file **list, unsigned int flags)
 {

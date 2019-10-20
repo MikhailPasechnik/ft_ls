@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ls.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bnesoi <bnesoi@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/20 19:39:43 by bnesoi            #+#    #+#             */
+/*   Updated: 2019/10/20 19:46:56 by bnesoi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_LS_H
-#define FT_LS_H
+# define FT_LS_H
 # include "libft.h"
 # include "ft_printf.h"
 
@@ -26,8 +38,7 @@
 # define IS_CD(s)(((s)[0] == '.' && (s)[1] == '\0'))
 # define IS_UP(s)(((s)[0] == '.' && (s)[1] == '.' && (s)[2] == '\0'))
 
-
-# define LSF_ALL "lRartSgd1"
+# define LSF_ALL   "lRartSgd1"
 # define LSF_L     (1u << 0u)
 # define LSF_RR    (1u << 1u)
 # define LSF_A     (1u << 2u)
@@ -39,21 +50,21 @@
 # define LSF_D     (1u << 8u)
 # define LSF_1     (1u << 9u)
 # define LSF_HELP  (1u << 10u)
-# define LSF_MULTI  (1u << 11u)
+# define LSF_MULTI (1u << 11u)
 
 typedef struct	s_list_layout
 {
-	int	st_blocks;
-	int	st_nlink;
-	int	pw_name;
-	int	gr_name;
-	int	st_size;
-	int	st_rdev_minor;
-	int	st_rdev_major;
-	int	st_blocks_sum;
+	size_t	st_blocks;
+	size_t	st_nlink;
+	size_t	pw_name;
+	size_t	gr_name;
+	size_t	st_size;
+	size_t	st_rdev_minor;
+	size_t	st_rdev_major;
+	size_t	st_blocks_sum;
 }				t_list_layout;
 
-typedef struct	s_file t_file;
+typedef struct s_file	t_file;
 
 struct			s_file
 {
@@ -83,7 +94,7 @@ void			update_layout(t_file *file, t_list_layout *l);
 /*
 ** Utils
 */
-int				int_len(int n);
+size_t				int_len(int n);
 int				ls_put_error(char *error, char *dir_name, int returns);
 int				display_help();
 int				unrecognized_option(char *option, size_t len);
@@ -97,11 +108,11 @@ void			put_list_file(t_file *file, t_list_layout *lay,
 /*
 ** Parse
 */
-int		parse_options(char *options, unsigned int *flags);
+int				parse_options(char *options, unsigned int *flags);
 
 /*
 ** Sort
 */
-void	sort_list(t_file **list, unsigned int flags);
+void			sort_list(t_file **list, unsigned int flags);
 
 #endif
