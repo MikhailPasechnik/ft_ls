@@ -6,7 +6,7 @@
 /*   By: bnesoi <bnesoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:39:43 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/10/20 20:31:50 by bnesoi           ###   ########.fr       */
+/*   Updated: 2019/10/20 20:33:13 by bnesoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@
 # define IS_CD(s)(((s)[0] == '.' && (s)[1] == '\0'))
 # define IS_UP(s)(((s)[0] == '.' && (s)[1] == '.' && (s)[2] == '\0'))
 
+/*
+** Flags
+** NOTE: It is important to keep LSF_ALL order and LSF_* flags order the same
+*/
 # define LSF_ALL   "lRartSfgd1"
 # define LSF_L     (1u << 0u)
 # define LSF_RR    (1u << 1u)
