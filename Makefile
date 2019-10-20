@@ -3,63 +3,79 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: caellis <caellis@student.42.fr>            +#+  +:+       +#+         #
+#    By: bnesoi <bnesoi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/11 15:11:22 by bnesoi            #+#    #+#              #
-#    Updated: 2019/08/23 13:27:56 by caellis          ###   ########.fr        #
+#    Updated: 2019/10/20 19:47:54 by bnesoi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME=libftprintf.a
+NAME=ft_ls
 
-INC_DIR=./include
-OBJ_DIR=./obj
-SRC_DIR=./src
+OS			=	$(shell uname -s)
+CC			=	gcc
+CFLAGS		=	-Wall -Wextra -Werror
 
-SRC_FILES=\
-	ft_printf.c			\
-	pf_parse.c			\
-	pf_put.c			\
-	pf_put_char.c		\
-	pf_put_int.c	    \
-	pf_put_float.c		\
-	pf_put_empty.c		\
-	pf_put_string.c		\
-	pf_put_prefix.c		\
-	pf_put_ptr.c		\
-	pf_atoi.c		    \
-	pf_long_math.c	    \
-	pf_strreverse.c		\
-	pf_util.c			\
-	pf_util_2.c
-HDR_FILES=\
-	ft_printf.h
+SRC_FILES	=			\
+	file.c				\
+	file_info.c			\
+	main.c				\
+	parse.c				\
+	put.c				\
+	sort.c				\
+	utils.c	
 
-HDR=$(addprefix $(INC_DIR)/, $(HDR_FILES))
-OBJ=$(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
-SRC=$(addprefix $(SRC_DIR)/, $(SRC_FILES))
+HDR_FILES	=			\
+	ft_ls.h
 
-CC=gcc
-CC_FLAGS= -Wall -Wextra -Werror
+DIR_SRC		=	./src
+DIR_INC		=	./includes
+DIR_OBJ		=	./obj
+
+LIBFT		=	./libft/libft.a
+LIBFT_DIR	=	./libft
+
+FT_PRINTF		=	./ft_printf/libftprintf.a
+FT_PRINTF_DIR	=	./ft_printf
+
+SRC			=	$(addprefix $(DIR_SRC)/, $(SRC_FILES))
+HDR			=	$(addprefix $(DIR_INC)/, $(HDR_FILES))
+OBJ			=	$(addprefix $(DIR_OBJ)/, $(SRC_FILES:.c=.o))
+
+INCLUDES	=	-I $(LIBFT_DIR) -I $(FT_PRINTF_DIR)/include -I $(DIR_INC)
+LIBS		:=	./libft/libft.a ./ft_printf/libftprintf.a
+
+LIBS	:= $(LIBS)
 
 all: $(NAME)
 
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
+$(DIR_OBJ):
+	@mkdir $(DIR_OBJ)
+	@mkdir $(DIR_OBJ)/ocl
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HDR)
-	$(CC) $(CC_FLAGS) -I $(INC_DIR) -o $@ -c $<
+$(NAME): $(DIR_OBJ) $(OBJ) $(LIBFT) $(FT_PRINTF)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME) $(SDL_LINK)
 
-$(NAME): $(OBJ_DIR) $(OBJ)
-	@ar rc $(NAME) $(OBJ)
-	@ranlib $(NAME)
+$(DIR_OBJ)/%.o:$(DIR_SRC)/%.c $(HDR)
+	$(CC) $(CFLAGS) -c $(INCLUDES) $< -o $@
+
+$(LIBFT): FAKE
+	@$(MAKE) -C $(LIBFT_DIR)/ --no-print-directory
+
+$(FT_PRINTF): FAKE
+	@$(MAKE) -C $(FT_PRINTF_DIR)/ --no-print-directory
 
 clean :
-	@/bin/rm -rf $(OBJ_DIR)
+	@/bin/rm -rf $(DIR_OBJ)
+	@$(MAKE) -C $(LIBFT_DIR) clean
+	@$(MAKE) -C $(FT_PRINTF_DIR) clean
 
 fclean : clean
-	@/bin/rm -f $(NAME)
+	@/bin/rm -f $(NAME) $(addprefix tests/test_,$(FILE_NAMES))
+	@$(MAKE) -C $(LIBFT_DIR) fclean
+	@$(MAKE) -C $(FT_PRINTF_DIR) fclean
+	@/bin/rm -f $(addprefix tests/,$(TEST_NAMES))
 
 re : fclean all
 
-.PHONY: -
+.PHONY: FAKE
