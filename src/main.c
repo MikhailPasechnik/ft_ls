@@ -58,7 +58,10 @@ int main(int argc, char **argv)
 	while (i < argc && argv[i][0] == '-')
 		parse_options(argv[i++], &flags);
 	flags |= (i < argc - 1) ? LSF_MULTI : 0;
-	while (i < argc)
-		list_dir(argv[i++], flags);
+	if (i >= argc)
+		list_dir(".", flags);
+	else
+		while (i < argc)
+			list_dir(argv[i++], flags);
 	return (0);
 }
