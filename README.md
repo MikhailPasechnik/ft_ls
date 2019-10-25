@@ -1,8 +1,27 @@
-*TODO*:
-- non list display no new line at the end and between multiple dir lists
+# ft_ls
+As simple as listing the files in a directory.
 
-Within your mandatory part you are allowed to use the following functions:
+# Usage
+`$> ls [-Ralrt] [file ...]`
 
+# *TODO*:
+**Main**
+- [ ] Basic ls output
+- [ ] Optimize list_sort?
+- [x] Verify -R
+- [x] Verify -a
+- [x] Verify -t
+- [ ] Verify and update -l (get rid of . and .. in output)
+- [ ] Check broken files/dir's (ls does not respond)
+
+**Bonus**
+- [ ] Add ACl parameters and extended attributes to '-l' output
+- [ ] Basic ls output with responsive column count
+- [ ] Flags '-u', '-f', '-g', '-d' (?)
+- [ ] Management of terminal colors ('-G')
+
+# Limitations
+Allowed standard functions:
 - write
 - opendir
 - readdir
@@ -21,7 +40,3 @@ Within your mandatory part you are allowed to use the following functions:
 - perror
 - strerror
 - exit
-
-You are allowed to use other functions to carry out the bonus part as long as their
-use is justified during your defence. For example, to use tcgetattr is justified in
-certain case, to use printf because you are lazy isn’t. Be smart!
