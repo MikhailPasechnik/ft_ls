@@ -29,12 +29,12 @@ static int		time_cmp(t_file *a, t_file *b)
 	int cmp_;
 
 	cmp_ = 0;
-	if (a->stat.st_mtimespec.tv_sec != b->stat.st_mtimespec.tv_sec)
-		cmp_ = a->stat.st_mtimespec.tv_sec >
-			b->stat.st_mtimespec.tv_sec ? -1 : 1;
-	if (a->stat.st_mtimespec.tv_nsec != b->stat.st_mtimespec.tv_nsec)
-		cmp_ = a->stat.st_mtimespec.tv_nsec >
-			b->stat.st_mtimespec.tv_nsec ? -1 : 1;
+	if (a->stat.ST_MTIME.tv_sec != b->stat.ST_MTIME.tv_sec)
+		cmp_ = a->stat.ST_MTIME.tv_sec >
+			b->stat.ST_MTIME.tv_sec ? -1 : 1;
+	if (a->stat.ST_MTIME.tv_nsec != b->stat.ST_MTIME.tv_nsec)
+		cmp_ = a->stat.ST_MTIME.tv_nsec >
+			b->stat.ST_MTIME.tv_nsec ? -1 : 1;
 	return (cmp_);
 }
 

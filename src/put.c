@@ -27,6 +27,6 @@ void	put_list_file(t_file *file, t_list_layout *lay, unsigned int flags)
 			"%*lu %*s %*s %*ld %.12s %s\n",
 			lay->st_nlink, file->stat.st_nlink, lay->pw_name, pw->pw_name,
 			lay->gr_name, gr->gr_name, lay->st_size, file->stat.st_size,
-			get_time_str(str_time, file->stat.st_mtimespec.tv_sec),
+			get_time_str(str_time, file->stat.ST_MTIME.tv_sec),
 			file->name);
 }

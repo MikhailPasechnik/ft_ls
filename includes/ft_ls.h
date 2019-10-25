@@ -38,6 +38,12 @@
 # define IS_CD(s)(((s)[0] == '.' && (s)[1] == '\0'))
 # define IS_UP(s)(((s)[0] == '.' && (s)[1] == '.' && (s)[2] == '\0'))
 
+# ifdef __APPLE__
+ # define ST_MTIME st_mtimespec
+# else
+ # define ST_MTIME st_mtim
+# endif
+
 /*
 ** Flags
 ** NOTE: It is important to keep LSF_ALL order and LSF_* flags order the same
