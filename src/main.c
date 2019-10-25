@@ -1,34 +1,49 @@
 #include "ft_ls.h"
 
-// TODO: Simplify!
-int		list_dir(char *dir_name, unsigned int flags)
+static int		get_dir_files(char *dir_name, t_file **list, t_list_layout *layout, unsigned int flags)
 {
 	struct dirent	*ent;
-	t_file			*list;
-	t_file			*tmp;
-	t_file			**it;
-	t_list_layout	layout;
 	DIR				*dir;
 
 	if ((dir = opendir(dir_name)) == NULL)
 		return (ls_put_error(LSE_NODIR, dir_name, LS_STATUSST));
-	list = NULL;
-	it = &list;
-	ft_bzero(&layout, sizeof(layout));
+	*list = NULL;
+	layout ? ft_bzero(layout, sizeof(*layout)) : 0;
 	while ((ent = readdir (dir)) != NULL) {
-		if (new_file(dir_name, ent, it))
+		if (new_file(dir_name, ent, list))
 		{
-			update_layout(*it, &layout);
-			it = &(*it)->next;
+			(flags & LSF_L) ? update_layout(*list, layout) : 0;
+			list = &(*list)->next;
 		}
 	}
+	return (LS_STATUSOK);
+}
+
+static void put_file_switch(t_file *file, t_list_layout *layout, unsigned int flags)
+{
+	if (flags & LSF_L)
+		put_list_file(file, layout, flags);
+	else
+		put_file(file, layout, flags);
+}
+
+// TODO: Simplify!
+int		list_dir(char *dir_name, unsigned int flags)
+{
+	t_file			*list;
+	t_file			*tmp;
+	t_list_layout	layout;
+
+	if (get_dir_files(dir_name, &list, &layout, flags) != LS_STATUSOK)
+		return (0);
 	sort_list(&list, flags);
 	flags & LSF_MULTI || flags & LSF_RR ? ft_printf("%s:\n", dir_name) : 0;
-	ft_printf("total %d\n", layout.st_blocks_sum);
+	if (flags & LSF_L)
+		ft_printf("total %d\n", layout.st_blocks_sum);
 	tmp = list;
 	while (list)
 	{
-		put_list_file(list, &layout, flags);
+		put_file_switch(list, &layout, flags);
 		list = list->next;
 	}
 	list = tmp;

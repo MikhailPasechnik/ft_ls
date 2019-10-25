@@ -1,5 +1,5 @@
 *TODO*:
-- non list display 
+- non list display no new line at the end and between multiple dir lists
 
 Within your mandatory part you are allowed to use the following functions:
 

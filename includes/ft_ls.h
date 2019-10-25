@@ -112,8 +112,10 @@ int				unrecognized_option(char *option, size_t len);
 /*
 ** Print functions
 */
-void			put_list_file(t_file *file, t_list_layout *lay,
-		unsigned int flags);
+void			put_list_file(t_file *f, t_list_layout *l,
+							unsigned int flags);
+void			put_file(t_file *f, t_list_layout *l,
+							unsigned int flags);
 
 /*
 ** Parse

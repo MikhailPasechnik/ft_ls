@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-void	put_list_file(t_file *file, t_list_layout *lay, unsigned int flags)
+void	put_list_file(t_file *f, t_list_layout *l, unsigned int flags)
 {
 	char			str_chmod[12];
 	char			str_time[12];
@@ -20,13 +20,20 @@ void	put_list_file(t_file *file, t_list_layout *lay, unsigned int flags)
 	struct group	*gr;
 
 	(void)flags;
-	pw = getpwuid(file->stat.st_uid);
-	gr = getgrgid(file->stat.st_gid);
-	ft_printf("%s ", get_chmod_str(str_chmod, file->stat.st_mode));
+	pw = getpwuid(f->stat.st_uid);
+	gr = getgrgid(f->stat.st_gid);
+	ft_printf("%s ", get_chmod_str(str_chmod, f->stat.st_mode));
 	ft_printf(
 			"%*lu %*s %*s %*ld %.12s %s\n",
-			lay->st_nlink, file->stat.st_nlink, lay->pw_name, pw->pw_name,
-			lay->gr_name, gr->gr_name, lay->st_size, file->stat.st_size,
-			get_time_str(str_time, file->stat.ST_MTIME.tv_sec),
-			file->name);
+			l->st_nlink, f->stat.st_nlink, l->pw_name, pw->pw_name,
+			l->gr_name, gr->gr_name, l->st_size, f->stat.st_size,
+			get_time_str(str_time, f->stat.ST_MTIME.tv_sec),
+			f->name);
+}
+
+void	put_file(t_file *f, t_list_layout *l, unsigned int flags)
+{
+	(void)l;
+	(void)flags;
+	ft_printf("%s ", f->name);
 }
