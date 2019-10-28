@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 12:35:30 by caellis           #+#    #+#             */
-/*   Updated: 2019/10/28 15:16:39 by caellis          ###   ########.fr       */
+/*   Updated: 2019/10/28 15:43:05 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static int		get_dir_files(char *dir_name, t_file **list, t_list_layout *layout, 
 			list = &(*list)->next;
 		}
 	}
+	closedir(dir);
 	if (errno == EBADF)
 		return (ls_put_error(LSE_NODIR, dir_name, LS_STATUSST));
 	return (LS_STATUSOK);
