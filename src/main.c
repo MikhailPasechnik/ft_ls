@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/25 12:35:30 by caellis           #+#    #+#             */
+/*   Updated: 2019/10/28 15:16:39 by caellis          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 
 static int		get_dir_files(char *dir_name, t_file **list, t_list_layout *layout, unsigned int flags)
@@ -9,13 +21,19 @@ static int		get_dir_files(char *dir_name, t_file **list, t_list_layout *layout, 
 		return (ls_put_error(LSE_NODIR, dir_name, LS_STATUSST));
 	*list = NULL;
 	layout ? ft_bzero(layout, sizeof(*layout)) : 0;
-	while ((ent = readdir (dir)) != NULL) {
+	// To distinguish between an end-of-directory condition or an error,
+	// you must set errno to zero before calling readdir.
+	errno = 0;
+	while ((ent = readdir(dir)) != NULL)
+	{
 		if (new_file(dir_name, ent, list))
 		{
 			(flags & LSF_L) ? update_layout(*list, layout) : 0;
 			list = &(*list)->next;
 		}
 	}
+	if (errno == EBADF)
+		return (ls_put_error(LSE_NODIR, dir_name, LS_STATUSST));
 	return (LS_STATUSOK);
 }
 

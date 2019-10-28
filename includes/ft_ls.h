@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:39:43 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/10/28 14:25:00 by caellis          ###   ########.fr       */
+/*   Updated: 2019/10/28 15:15:21 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define LS_STATUSMP 1
 # define LS_STATUSST 2
 # define LSE_NODIR "ft_ls: cannot access '%s': No such file or directory\n"
+# define LSE_BADF "ft_ls: cannot access '%s': The dirstream is not valid."
 
 # define MAX(a, b)((a) > (b) ? (a) : (b))
 # define IS_CD(s)(((s)[0] == '.' && (s)[1] == '\0'))
