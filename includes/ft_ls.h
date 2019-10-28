@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnesoi <bnesoi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:39:43 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/10/20 20:33:13 by bnesoi           ###   ########.fr       */
+/*   Updated: 2019/10/28 14:25:00 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@
 ** Flags
 ** NOTE: It is important to keep LSF_ALL order and LSF_* flags order the same
 */
-# define LSF_ALL   "lRartSfgd1"
+# define LSF_ALL   "lRartufgd1"
 # define LSF_L     (1u << 0u)
 # define LSF_RR    (1u << 1u)
 # define LSF_A     (1u << 2u)
 # define LSF_R     (1u << 3u)
 # define LSF_T     (1u << 4u)
-# define LSF_S     (1u << 5u)
+# define LSF_U     (1u << 5u)
 # define LSF_F     (1u << 6u)
 # define LSF_G     (1u << 7u)
 # define LSF_D     (1u << 8u)
