@@ -2,7 +2,7 @@
 As simple as listing the files in a directory.
 
 # Usage
-`$> ls [-Ralrtufgd] [file ...]`
+`$> ls [-RalrtSufgd] [file ...]`
 
 # *TODO*:
 **Main**
@@ -12,8 +12,8 @@ As simple as listing the files in a directory.
 - [x] Verify -a
 - [x] Verify -t
 - [ ] Verify and update -l (get rid of . and .. in output)
-    - [x] Update flag macros to flags actually used in the project "lRartufgd"
-- [ ] Check broken files/dir's (ls does not respond)
+    - [x] Update flag macros to flags actually used in the project "lRartSufgd"
+- [x] Check broken files/dir's (checked on restricted access dirs)
 
 **Bonus**
 - [ ] Add ACl parameters and extended attributes to '-l' output
