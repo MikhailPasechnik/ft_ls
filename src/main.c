@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 12:35:30 by caellis           #+#    #+#             */
-/*   Updated: 2019/10/28 16:18:00 by caellis          ###   ########.fr       */
+/*   Updated: 2019/10/28 18:16:11 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,13 @@ int		list_dir(char *dir_name, unsigned int flags)
 		put_file_switch(list, &layout, flags);
 		list = list->next;
 	}
+	ft_putstr("\n");
 	list = tmp;
 	while (list && flags & LSF_RR)
 	{
 		if (flags & LSF_RR && S_ISDIR(list->stat.st_mode) && !IS_CD(list->name) && !IS_UP(list->name))
 		{
-			ft_printf("\n");
+			ft_putstr("\n");
 			list_dir(list->file_name, flags);
 		}
 		tmp = list;
@@ -96,6 +97,9 @@ int main(int argc, char **argv)
 		list_dir(".", flags);
 	else
 		while (i < argc)
+		{
 			list_dir(argv[i++], flags);
+			ft_putstr("\n");
+		}
 	return (0);
 }
