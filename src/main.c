@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 12:35:30 by caellis           #+#    #+#             */
-/*   Updated: 2019/10/28 15:43:05 by caellis          ###   ########.fr       */
+/*   Updated: 2019/10/28 16:18:00 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int		get_dir_files(char *dir_name, t_file **list, t_list_layout *layout, 
 	DIR				*dir;
 
 	if ((dir = opendir(dir_name)) == NULL)
-		return (ls_put_error(LSE_NODIR, dir_name, LS_STATUSST));
+		return (ls_put_error(strerror(errno), dir_name, LS_STATUSST));
 	*list = NULL;
 	layout ? ft_bzero(layout, sizeof(*layout)) : 0;
 	// To distinguish between an end-of-directory condition or an error,
@@ -34,7 +34,7 @@ static int		get_dir_files(char *dir_name, t_file **list, t_list_layout *layout, 
 	}
 	closedir(dir);
 	if (errno == EBADF)
-		return (ls_put_error(LSE_NODIR, dir_name, LS_STATUSST));
+		return (ls_put_error(strerror(errno), dir_name, LS_STATUSST));
 	return (LS_STATUSOK);
 }
 

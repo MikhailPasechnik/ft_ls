@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnesoi <bnesoi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:12:35 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/10/20 19:46:49 by bnesoi           ###   ########.fr       */
+/*   Updated: 2019/10/28 16:18:46 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ size_t		int_len(int n)
 
 int		ls_put_error(char *error, char *dir_name, int returns)
 {
-	ft_printf(error, dir_name);
+	ft_printf("ft_ls: %s: %s\n", dir_name, error);
 	return (returns);
 }
 

@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:39:43 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/10/28 15:22:55 by caellis          ###   ########.fr       */
+/*   Updated: 2019/10/28 16:16:38 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@
 # define LS_STATUSOK 0
 # define LS_STATUSMP 1
 # define LS_STATUSST 2
-# define LSE_NODIR "ft_ls: cannot access '%s': No such file or directory\n"
-# define LSE_BADF "ft_ls: cannot access '%s': The dirstream is not valid."
+# define LSE_NODIR "ft_ls: %s: No such file or directory\n"
 
 # define MAX(a, b)((a) > (b) ? (a) : (b))
 # define IS_CD(s)(((s)[0] == '.' && (s)[1] == '\0'))
@@ -64,6 +63,10 @@
 # define LSF_HELP  (1u << 11u)
 # define LSF_MULTI (1u << 12u)
 
+
+/*	st_blocks - number of 512B blocks allocated
+	st_nlink - number of hard links
+*/
 typedef struct	s_list_layout
 {
 	size_t	st_blocks;
