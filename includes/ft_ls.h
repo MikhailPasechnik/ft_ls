@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:39:43 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/10/28 16:16:38 by caellis          ###   ########.fr       */
+/*   Updated: 2019/10/28 17:43:24 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,6 @@
 # define LSF_HELP  (1u << 11u)
 # define LSF_MULTI (1u << 12u)
 
-
-/*	st_blocks - number of 512B blocks allocated
-	st_nlink - number of hard links
-*/
 typedef struct	s_list_layout
 {
 	size_t	st_blocks;

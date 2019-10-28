@@ -41,3 +41,6 @@ Allowed standard functions:
 - perror
 - strerror
 - exit
+
+# Flags
+- '-f' flag force turns on '-a' flag
