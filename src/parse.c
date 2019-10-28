@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnesoi <bnesoi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:12:42 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/10/20 19:12:51 by bnesoi           ###   ########.fr       */
+/*   Updated: 2019/10/28 16:52:47 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int			parse_options(char *options, unsigned int *flags)
 	{
 		if (ft_strcmp(options, "--help") == 0)
 			display_help();
+		else if (ft_strcmp(options, "--") == 0)
+			return (0);
 		unrecognized_option(options, ft_strlen(options));
 	}
 	i = 1;
