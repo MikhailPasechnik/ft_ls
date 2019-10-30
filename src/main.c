@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ch3rryhq <ch3rryhq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 12:35:30 by caellis           #+#    #+#             */
-/*   Updated: 2019/10/28 18:16:11 by caellis          ###   ########.fr       */
+/*   Updated: 2019/10/30 12:44:43 by ch3rryhq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ static void put_file_switch(t_file *file, t_list_layout *layout, unsigned int fl
 	if (flags & LSF_L)
 		put_list_file(file, layout, flags);
 	else
-		put_file(file, layout, flags);
+    {
+        put_file(file, layout, flags);
+        flags & LSF_1 ? ft_putstr("\n") : void(0);
+    }
 }
 
 // TODO: Simplify!
@@ -53,14 +56,14 @@ int		list_dir(char *dir_name, unsigned int flags)
 	t_file			*tmp;
 	t_list_layout	layout;
 
+    tmp = list;
 	if (get_dir_files(dir_name, &list, &layout, flags) != LS_STATUSOK)
 		return (0);
-	sort_list(&list, flags);
-	flags & LSF_MULTI || flags & LSF_RR ? ft_printf("%s:\n", dir_name) : 0;
-	if (flags & LSF_L)
-		ft_printf("total %d\n", layout.st_blocks_sum);
-	tmp = list;
-	while (list)
+	flags & LSF_F ? (void)0 : sort_list(&list, flags);
+	flags & LSF_MULTI || flags & LSF_RR ? ft_printf("%s:\n", dir_name) : (void)0;
+	flags & LSF_L ? ft_printf("total %d\n", layout.st_blocks_sum) : (void)0;
+	// create a switch for this loop to take into account -d flag
+    while (list)
 	{
 		put_file_switch(list, &layout, flags);
 		list = list->next;
