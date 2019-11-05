@@ -20,17 +20,18 @@ static int		get_dir_files(char *dir_name, t_file **list, t_list_layout *layout, 
 	if ((dir = opendir(dir_name)) == NULL)
 		return (ls_put_error(strerror(errno), dir_name, LS_STATUSST));
 	*list = NULL;
-	layout ? ft_bzero(layout, sizeof(*layout)) : 0;
-	// To distinguish between an end-of-directory condition or an error,
-	// you must set errno to zero before calling readdir.
+	layout ? ft_bzero(layout, sizeof(*layout)) : (void)0;
 	errno = 0;
 	while ((ent = readdir(dir)) != NULL)
 	{
 		if (new_file(dir_name, ent, list))
 		{
-			(flags & LSF_L) ? update_layout(*list, layout) : 0;
+			flags & LSF_L ? update_layout(*list, layout) : (void)0;
+			flags & LSF_D ? ft_strcpy((*list)->name, dir_name) : (void)0;
 			list = &(*list)->next;
 		}
+		if (flags & LSF_D)
+			break ;
 	}
 	closedir(dir);
 	if (errno == EBADF)
@@ -45,7 +46,7 @@ static void put_file_switch(t_file *file, t_list_layout *layout, unsigned int fl
 	else
     {
         put_file(file, layout, flags);
-        flags & LSF_1 ? ft_putstr("\n") : void(0);
+        flags & LSF_1 ? ft_putstr("\n") : (void)0;
     }
 }
 
@@ -56,13 +57,12 @@ int		list_dir(char *dir_name, unsigned int flags)
 	t_file			*tmp;
 	t_list_layout	layout;
 
-    tmp = list;
 	if (get_dir_files(dir_name, &list, &layout, flags) != LS_STATUSOK)
 		return (0);
+	tmp = list;
 	flags & LSF_F ? (void)0 : sort_list(&list, flags);
-	flags & LSF_MULTI || flags & LSF_RR ? ft_printf("%s:\n", dir_name) : (void)0;
+	(flags & LSF_MULTI && !(flags & LSF_D)) || flags & LSF_RR ? ft_printf("%s:\n", dir_name) : (void)0;
 	flags & LSF_L ? ft_printf("total %d\n", layout.st_blocks_sum) : (void)0;
-	// create a switch for this loop to take into account -d flag
     while (list)
 	{
 		put_file_switch(list, &layout, flags);
