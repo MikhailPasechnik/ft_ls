@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnesoi <bnesoi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:12:57 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/10/20 19:13:43 by bnesoi           ###   ########.fr       */
+/*   Updated: 2019/11/05 17:42:23 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int	new_file(const char dir_name[PATH_MAX],
+int		new_file(const char dir_name[PATH_MAX],
 	const struct dirent *ent, t_file **file)
 {
 	if (!(*file = (t_file *)ft_memalloc(sizeof(t_file))))
@@ -25,4 +25,14 @@ int	new_file(const char dir_name[PATH_MAX],
 	}
 	ft_strcpy((*file)->name, ent->d_name);
 	return (1);
+}
+
+void	file_iter(t_file *file, t_list_layout *layout, unsigned int flags,
+				void (*f)(t_file *file, t_list_layout *layout, unsigned int flags))
+{
+	while (file && f)
+	{
+		f(lst);
+		file = file->next;
+	}
 }
