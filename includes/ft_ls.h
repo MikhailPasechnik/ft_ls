@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:39:43 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/05 17:24:46 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/05 18:13:28 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ struct			s_file
 */
 int				new_file(const char dir_name[PATH_MAX],
 		const struct dirent *ent, t_file **file);
-
+void			file_iter(t_file *file, t_list_layout *layout, unsigned int flags,
+		void (*f)(t_file *file, t_list_layout *layout, unsigned int flags));
 /*
 ** File info
 */
