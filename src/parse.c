@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:12:42 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/10/28 16:52:47 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/05 13:57:38 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ int			parse_options(char *options, unsigned int *flags)
 		*flags |= (1u << at);
 		i++;
 	}
+	*flags & LSF_F ? flags |= LSF_A : (void)0;
 	return (0);
 }
