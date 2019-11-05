@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:39:43 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/10/28 17:43:24 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/05 17:24:46 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ typedef struct	s_list_layout
 	size_t	st_rdev_minor;
 	size_t	st_rdev_major;
 	size_t	st_blocks_sum;
+	size_t	max_name;
+	unsigned short	win_width;
 }				t_list_layout;
 
 typedef struct s_file	t_file;
