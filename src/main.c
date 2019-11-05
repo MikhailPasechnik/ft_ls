@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ch3rryhq <ch3rryhq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 12:35:30 by caellis           #+#    #+#             */
-/*   Updated: 2019/10/30 12:44:43 by ch3rryhq         ###   ########.fr       */
+/*   Updated: 2019/11/05 17:49:41 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,17 @@ static int		get_dir_files(char *dir_name, t_file **list, t_list_layout *layout, 
 static void put_file_switch(t_file *file, t_list_layout *layout, unsigned int flags)
 {
 	if (flags & LSF_L)
-		put_list_file(file, layout, flags);
+		file_iter(file, layout, flags, put_list_file);
 	else
-    {
-        put_file(file, layout, flags);
-        flags & LSF_1 ? ft_putstr("\n") : (void)0;
-    }
+	{
+		// Переписать с учетом win_width и max_name
+		while (file)
+		{
+			put_file(file, layout, flags);
+			flags & LSF_1 ? ft_putstr("\n") : (void)0;
+			file = file->next;
+		}
+	}
 }
 
 // TODO: Simplify!
@@ -63,12 +68,8 @@ int		list_dir(char *dir_name, unsigned int flags)
 	flags & LSF_F ? (void)0 : sort_list(&list, flags);
 	(flags & LSF_MULTI && !(flags & LSF_D)) || flags & LSF_RR ? ft_printf("%s:\n", dir_name) : (void)0;
 	flags & LSF_L ? ft_printf("total %d\n", layout.st_blocks_sum) : (void)0;
-    while (list)
-	{
-		put_file_switch(list, &layout, flags);
-		list = list->next;
-	}
-	ft_putstr("\n");
+	put_file_switch(list, &layout, flags);
+	flags & LSF_RR ? ft_putstr("\n") : (void)0;
 	list = tmp;
 	while (list && flags & LSF_RR)
 	{
