@@ -6,13 +6,13 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:12:35 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/10/28 16:18:46 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/05 16:06:27 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-size_t		int_len(int n)
+size_t	int_len(int n)
 {
 	size_t		len;
 
@@ -53,7 +53,7 @@ int		display_help(void)
 	exit(LS_STATUSOK);
 }
 
-int	unrecognized_option(char *option, size_t len)
+int		unrecognized_option(char *option, size_t len)
 {
 	ft_printf(
 	"ls: unrecognized option '%.*s'\n"
