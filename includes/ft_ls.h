@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:39:43 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/05 18:13:28 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/05 18:31:42 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,11 @@ struct			s_file
 };
 
 /*
+** List dir function
+*/
+int		list_dir(char *dir_name, unsigned int flags);
+
+/*
 ** File struct functions
 */
 int				new_file(const char dir_name[PATH_MAX],
@@ -108,7 +113,7 @@ void			update_layout(t_file *file, t_list_layout *l);
 /*
 ** Utils
 */
-size_t				int_len(int n);
+size_t			int_len(int n);
 int				ls_put_error(char *error, char *dir_name, int returns);
 int				display_help();
 int				unrecognized_option(char *option, size_t len);
@@ -120,6 +125,7 @@ void			put_list_file(t_file *f, t_list_layout *l,
 							unsigned int flags);
 void			put_file(t_file *f, t_list_layout *l,
 							unsigned int flags);
+void			put_file_recursive(t_file *file, unsigned int flags);
 
 /*
 ** Parse

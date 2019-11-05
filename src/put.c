@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnesoi <bnesoi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:01:51 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/10/20 19:47:19 by bnesoi           ###   ########.fr       */
+/*   Updated: 2019/11/05 18:30:05 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,21 @@ void	put_file(t_file *f, t_list_layout *l, unsigned int flags)
 	(void)l;
 	(void)flags;
 	ft_printf("%s ", f->name);
+}
+
+void	put_file_recursive(t_file *file, unsigned int flags)
+{
+	t_file	*tmp;
+
+	while (file)
+	{
+		if (S_ISDIR(file->stat.st_mode) && !IS_CD(file->name) && !IS_UP(file->name))
+		{
+			ft_putstr("\n");
+			list_dir(file->file_name, flags);
+		}
+		tmp = file;
+		file = file->next;
+		free(tmp);
+	}
 }
