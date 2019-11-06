@@ -7,8 +7,8 @@ As simple as listing the files in a directory.
 # *TODO*:
 **Main**
 - [ ] Basic ls output
-    - [ ] Update get_dir_files() to drop '.'-files on '-a' flag
-    - [ ] Update list_dir() to store current terminal width in layout->win_width
+    - [x] Update get_dir_files() to drop '.'-files on '-a' flag
+    - [x] Update list_dir() to store current terminal width in layout->w
     - [ ] Update update_layout() to calculate layout->max_name being the current longest name
     - [ ] Rewrite put_file() to pretty print determing on termina window width  
 - [ ] Optimize list_sort?
