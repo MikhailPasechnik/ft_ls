@@ -65,16 +65,16 @@
 
 typedef struct	s_list_layout
 {
-	size_t	st_blocks;
-	size_t	st_nlink;
-	size_t	pw_name;
-	size_t	gr_name;
-	size_t	st_size;
-	size_t	st_rdev_minor;
-	size_t	st_rdev_major;
-	size_t	st_blocks_sum;
-	size_t	max_name;
-	unsigned short	win_width;
+	size_t			st_blocks;
+	size_t			st_nlink;
+	size_t			pw_name;
+	size_t			gr_name;
+	size_t			st_size;
+	size_t			st_rdev_minor;
+	size_t			st_rdev_major;
+	size_t			st_blocks_sum;
+	size_t			max_name;
+	struct winsize	w;
 }				t_list_layout;
 
 typedef struct s_file	t_file;
