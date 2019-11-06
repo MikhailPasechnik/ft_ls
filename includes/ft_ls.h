@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:39:43 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/05 18:31:42 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/06 16:01:19 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,8 @@ void			put_list_file(t_file *f, t_list_layout *l,
 void			put_file(t_file *f, t_list_layout *l,
 							unsigned int flags);
 void			put_file_recursive(t_file *file, unsigned int flags);
-
+static void 	put_file_switch(t_file *file, t_list_layout *layout,
+		unsigned int flags)
 /*
 ** Parse
 */

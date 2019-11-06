@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 12:35:30 by caellis           #+#    #+#             */
-/*   Updated: 2019/11/05 18:58:45 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/06 16:01:29 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,6 @@ static int		get_dir_files(char *dir_name, t_file **list, t_list_layout *layout, 
 	if (errno == EBADF)
 		return (ls_put_error(strerror(errno), dir_name, LS_STATUSST));
 	return (LS_STATUSOK);
-}
-
-static void put_file_switch(t_file *file, t_list_layout *layout, unsigned int flags)
-{
-	if (flags & LSF_L)
-		file_iter(file, layout, flags, put_list_file);
-	else
-	{
-		// Переписать с учетом win_width и max_name
-		while (file)
-		{
-			put_file(file, layout, flags);
-			flags & LSF_1 ? ft_putstr("\n") : (void)0;
-			file = file->next;
-		}
-	}
 }
 
 int		list_dir(char *dir_name, unsigned int flags)
