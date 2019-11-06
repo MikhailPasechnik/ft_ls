@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 12:35:30 by caellis           #+#    #+#             */
-/*   Updated: 2019/11/06 16:01:29 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/06 18:04:57 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ static int		get_dir_files(char *dir_name, t_file **list, t_list_layout *layout, 
 
 	if ((dir = opendir(dir_name)) == NULL)
 		return (ls_put_error(strerror(errno), dir_name, LS_STATUSST));
-	*list = NULL;
-	layout ? ft_bzero(layout, sizeof(*layout)) : (void)0;
 	errno = 0;
 	while ((ent = readdir(dir)) != NULL)
 	{
+		if (!(flags & LSF_A) && IS_DOT(ent->d_name))
+			continue ;
 		if (new_file(dir_name, ent, list))
 		{
 			flags & LSF_L ? update_layout(*list, layout) : (void)0;
@@ -43,7 +43,9 @@ int		list_dir(char *dir_name, unsigned int flags)
 {
 	t_file			*list;
 	t_list_layout	layout;
-
+	
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &(layout.w));
+	ft_bzero((void *)&layout, sizeof(layout));
 	if (get_dir_files(dir_name, &list, &layout, flags) != LS_STATUSOK)
 		return (0);
 	flags & LSF_F ? (void)0 : sort_list(&list, flags);
