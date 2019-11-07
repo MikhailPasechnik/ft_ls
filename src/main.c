@@ -45,7 +45,7 @@ int		list_dir(char *dir_name, unsigned int flags)
 	t_list_layout	layout;
 	
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &(layout.w));
-	ft_bzero((void *)&layout, sizeof(layout));
+	*flags & LSF_L ? ft_bzero((void *)&layout, sizeof(layout)) : (void)0;
 	if (get_dir_files(dir_name, &list, &layout, flags) != LS_STATUSOK)
 		return (0);
 	flags & LSF_F ? (void)0 : sort_list(&list, flags);
