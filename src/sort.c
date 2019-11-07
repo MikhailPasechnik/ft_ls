@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnesoi <bnesoi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:02:18 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/10/20 19:11:55 by bnesoi           ###   ########.fr       */
+/*   Updated: 2019/11/07 17:12:53 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,11 +115,14 @@ static void		bubble_sort(t_file **list, int (*cmp)(t_file *, t_file *))
 
 void	sort_list(t_file **list, unsigned int flags)
 {
-	bubble_sort(list, name_cmp);
-	if (flags & LSF_T)
-		bubble_sort(list, time_cmp);
-	if (flags & LSF_S)
-		bubble_sort(list, size_cmp);
-	if (flags & LSF_R)
-		reverse_list(list);
+	if (*list)
+	{
+		bubble_sort(list, name_cmp);
+		if (flags & LSF_T)
+			bubble_sort(list, time_cmp);
+		if (flags & LSF_S)
+			bubble_sort(list, size_cmp);
+		if (flags & LSF_R)
+			reverse_list(list);
+	}
 }
