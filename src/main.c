@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 12:35:30 by caellis           #+#    #+#             */
-/*   Updated: 2019/11/06 18:04:57 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/07 16:31:12 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static int		get_dir_files(char *dir_name, t_file **list, t_list_layout *layout, 
 			continue ;
 		if (new_file(dir_name, ent, list))
 		{
+			flags |= LSF_FILES;
 			flags & LSF_L ? update_layout(*list, layout) : (void)0;
 			flags & LSF_D ? ft_strcpy((*list)->name, dir_name) : (void)0;
 			list = &(*list)->next;
@@ -33,6 +34,7 @@ static int		get_dir_files(char *dir_name, t_file **list, t_list_layout *layout, 
 		if (flags & LSF_D)
 			break ;
 	}
+	flags & LSF_FILES ? (void)0 : (*list = NULL);
 	closedir(dir);
 	if (errno == EBADF)
 		return (ls_put_error(strerror(errno), dir_name, LS_STATUSST));
@@ -45,7 +47,7 @@ int		list_dir(char *dir_name, unsigned int flags)
 	t_list_layout	layout;
 	
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &(layout.w));
-	*flags & LSF_L ? ft_bzero((void *)&layout, sizeof(layout)) : (void)0;
+	flags & LSF_L ? ft_bzero((void *)&layout, sizeof(layout)) : (void)0;
 	if (get_dir_files(dir_name, &list, &layout, flags) != LS_STATUSOK)
 		return (0);
 	flags & LSF_F ? (void)0 : sort_list(&list, flags);
