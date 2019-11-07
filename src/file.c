@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:12:57 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/05 18:10:46 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/07 16:23:31 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,17 @@ void	file_iter(t_file *file, t_list_layout *layout, unsigned int flags,
 		f(file, layout, flags);
 		file = file->next;
 	}
+}
+
+void	file_free(t_file **file)
+{
+	t_file	*tmp;
+
+	while (file && *file)
+	{
+		tmp = *file;
+		*file = (*file)->next;
+		free(tmp);
+	}
+	*file = NULL;
 }
