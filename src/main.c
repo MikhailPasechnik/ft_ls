@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 12:35:30 by caellis           #+#    #+#             */
-/*   Updated: 2019/11/07 18:53:33 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/08 16:55:08 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static int		get_dir_files(char *dir_name, t_file **list, t_list_layout *layout, 
 		{
 			flags |= LSF_FILES;
 			ent->d_namlen > layout->max_name ? (layout->max_name = ent->d_namlen) : (void)0;
+			layout->n_files++;
 			flags & LSF_L ? update_layout(*list, layout) : (void)0;
 			flags & LSF_D ? ft_strcpy((*list)->name, dir_name) : (void)0;
 			list = &(*list)->next;
@@ -47,6 +48,7 @@ int		list_dir(char *dir_name, unsigned int flags)
 	t_file			*list;
 	t_list_layout	layout;
 	
+	layout.n_files = 0;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &(layout.w));
 	flags & LSF_L ? ft_bzero((void *)&layout, sizeof(layout)) : ft_bzero((void *)&layout.max_name, sizeof(size_t));
 	if (get_dir_files(dir_name, &list, &layout, flags) != LS_STATUSOK)
@@ -57,7 +59,7 @@ int		list_dir(char *dir_name, unsigned int flags)
 	put_file_switch(list, &layout, flags);
 	flags & LSF_RR ? ft_putstr("\n") : (void)0;
 	list && flags & LSF_RR ? put_file_recursive(list, flags) : (void)0;
-	flags & LSF_RR ? (void)0 : ft_putstr("\n");
+	//flags & LSF_RR ? (void)0 : ft_putstr("\n");
 	return (1);
 }
 
