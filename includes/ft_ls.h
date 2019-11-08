@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:39:43 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/07 17:09:23 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/08 15:12:24 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,10 @@ typedef struct	s_list_layout
 	size_t			st_rdev_minor;
 	size_t			st_rdev_major;
 	size_t			st_blocks_sum;
-	size_t			max_name;
+	unsigned short	max_name;
+	unsigned short	n_files;
+	unsigned short	cols;
+	unsigned short 	rows;
 	struct winsize	w;
 }				t_list_layout;
 
@@ -128,7 +131,7 @@ void			put_list_file(t_file *f, t_list_layout *l,
 void			put_file(t_file *f, t_list_layout *l,
 							unsigned int flags);
 void			put_file_recursive(t_file *file, unsigned int flags);
-void 			put_file_switch(t_file *file, t_list_layout *layout,
+void 			put_file_switch(t_file *file, t_list_layout *l,
 		unsigned int flags);
 /*
 ** Parse
