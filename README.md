@@ -10,7 +10,9 @@ As simple as listing the files in a directory.
     - [x] Update get_dir_files() to drop '.'-files on '-a' flag
     - [x] Update list_dir() to store current terminal width in layout->w
     - [x] Update update_layout() to calculate layout->max_name being the current longest name
-    - [ ] Rewrite put_file() to pretty print determing on termina window width  
+    - [x] Rewrite put_file() to pretty print determing on terminal window width
+    - [ ] Fix joint work with -R flag (dividing by zero somewhere AGAIN)
+    - [ ] gimme back the '-1' flag
 - [ ] Optimize list_sort?
 - [x] Verify -a (current basic bahaviour)
     - [ ] Fix on basic ls output completion
@@ -19,7 +21,7 @@ As simple as listing the files in a directory.
 - [x] Verify and update -l
     - [x] Update flag macros to flags actually used in the project "lRartSufgd"
 - [x] Check broken files/dir's (checked on restricted access dirs)
-- [ ] Clean up memory on finish
+- [ ] Clean up memory on finish at put_file_switch()
 - [ ] NORMalize
 
 **Bonus**

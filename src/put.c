@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:01:51 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/06 17:57:58 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/08 17:33:19 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,39 @@ void	put_list_file(t_file *f, t_list_layout *l, unsigned int flags)
 
 void	put_file(t_file *f, t_list_layout *l, unsigned int flags)
 {
-	(void)l;
+	char			files[l->n_files + 1][NAME_MAX + 1];
+	char			out[l->n_files * (l->max_name + 1) + 1];
+	char			*tmp;
+	unsigned short	i;
+	unsigned short	pos;
+	unsigned short	offset;
+
+	ft_bzero((void *)out, sizeof(l->n_files * (l->max_name + 1) + 1));
+	i = 0;
+	tmp = out;
 	(void)flags;
-	ft_printf("%s ", f->name);
+	while (f)
+	{
+		ft_strcpy(files[i], f->name);
+		files[i][NAME_MAX] = '\0';
+		i++;
+		f = f->next;
+	}
+	i = 0;
+	//ft_printf("%s\ncols is..%lu\nrows is..%lu\nnum of files is..%lu\n", files[i], l->cols, l->rows, l->n_files);
+	offset = 0;
+	while (i < l->rows)
+	{
+		pos = i;
+		while (pos < l->n_files)
+		{
+			offset += ft_sprintf(tmp + offset, "%-*s ", l->max_name, files[pos]);
+			pos += l->rows;
+		}
+		ft_strcpy(tmp + offset, "\n");
+		i++;
+	}
+	ft_putstr(out);
 }
 
 void	put_file_recursive(t_file *file, unsigned int flags)
@@ -55,18 +85,17 @@ void	put_file_recursive(t_file *file, unsigned int flags)
 	}
 }
 
-void put_file_switch(t_file *file, t_list_layout *layout, unsigned int flags)
+void put_file_switch(t_file *file, t_list_layout *l, unsigned int flags)
 {
 	if (flags & LSF_L)
-		file_iter(file, layout, flags, put_list_file);
+		file_iter(file, l, flags, put_list_file);
 	else
 	{
-		// Переписать с учетом win_width и max_name
-		while (file)
-		{
-			put_file(file, layout, flags);
-			flags & LSF_1 ? ft_putstr("\n") : (void)0;
-			file = file->next;
-		}
+		//ft_printf("num of files is..%lu\nmax_name is..%lu\n width is %lu\n",l->n_files, l->max_name, l->w.ws_col);
+		l->cols = l->w.ws_col / l->max_name;
+		l->rows = l->n_files / l->cols > 0 ? l->n_files / l->cols : 1u;
+		//ft_printf("cols is..%lu\nrows is..%lu\nnum of files is..%lu\n", l->cols, l->rows, l->n_files);
+		put_file(file, l, flags);
 	}
+	// Clean up here
 }
