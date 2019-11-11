@@ -16,14 +16,14 @@ As simple as listing the files in a directory.
     - [x] Rewrite put_file() to pretty print determing on terminal window width
     - [x] Fix joint work with -R flag (dividing by zero somewhere AGAIN)
     - [x] gimme back the '-1' flag
+- [ ] Verify and update -l
+    - [ ]  **Read and output symbolic link reference**
+    - [x] Update flag macros to flags actually used in the project "lRartSufgd"
 - [ ] **Optimize list_sort?**
 - [x] Verify -a (current basic bahaviour)
     - [x] Fix on basic ls output completion
 - [x] Verify -R
 - [x] Verify -t
-- [x] Verify and update -l
-    - [ ]  **Read and output symbolic link reference**
-    - [x] Update flag macros to flags actually used in the project "lRartSufgd"
 - [x] Check broken files/dir's (checked on restricted access dirs)
 - [ ] Clean up memory on finish at put_file_switch()
 - [ ] NORMalize
@@ -31,11 +31,11 @@ As simple as listing the files in a directory.
 **Bonus**
 - [ ] Add ACl parameters and extended attributes to '-l' output
 - [ ] Flag '-u'
+- [ ] (?)Management of terminal colors ('-G')
 - [x] Flag '-f'
 - [x] Flag '-g' (ommit owner)
 - [x] Flag '-d'
     - [x] Fix newlines / spaces (should be auto-fixed on basic ls output)
-- [ ] (?)Management of terminal colors ('-G')
 
 # Limitations
 Allowed standard functions:
