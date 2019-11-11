@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:01:51 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/08 17:33:19 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/11 14:55:14 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,19 @@ void	put_file(t_file *f, t_list_layout *l, unsigned int flags)
 		f = f->next;
 	}
 	i = 0;
-	//ft_printf("%s\ncols is..%lu\nrows is..%lu\nnum of files is..%lu\n", files[i], l->cols, l->rows, l->n_files);
+	//ft_printf("win width is %lu\nmax_name is..%lu\ncols is..%lu\nrows is..%lu\nnum of files is..%lu\n", l->w.ws_col, l->max_name, l->cols, l->rows, l->n_files);
 	offset = 0;
 	while (i < l->rows)
 	{
 		pos = i;
-		while (pos < l->n_files)
+		while (pos <= l->n_files)
 		{
 			offset += ft_sprintf(tmp + offset, "%-*s ", l->max_name, files[pos]);
 			pos += l->rows;
 		}
+		
 		ft_strcpy(tmp + offset, "\n");
+		offset++;
 		i++;
 	}
 	ft_putstr(out);
@@ -91,10 +93,9 @@ void put_file_switch(t_file *file, t_list_layout *l, unsigned int flags)
 		file_iter(file, l, flags, put_list_file);
 	else
 	{
-		//ft_printf("num of files is..%lu\nmax_name is..%lu\n width is %lu\n",l->n_files, l->max_name, l->w.ws_col);
-		l->cols = l->w.ws_col / l->max_name;
-		l->rows = l->n_files / l->cols > 0 ? l->n_files / l->cols : 1u;
-		//ft_printf("cols is..%lu\nrows is..%lu\nnum of files is..%lu\n", l->cols, l->rows, l->n_files);
+		l->cols = l->w.ws_col / (l->max_name + 1) == 0 ? 1 : l->w.ws_col / (l->max_name + 1) - 1;
+		l->rows = l->n_files / l->cols ? l->n_files / l->cols : 1;
+		//ft_printf("win width is %lu\nmax_name is..%lu\ncols is..%lu\nrows is..%lu\nnum of files is..%lu\n", l->w.ws_col, l->max_name, l->cols, l->rows, l->n_files);
 		put_file(file, l, flags);
 	}
 	// Clean up here
