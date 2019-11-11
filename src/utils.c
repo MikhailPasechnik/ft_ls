@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnesoi <bnesoi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:12:35 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/10/20 19:46:49 by bnesoi           ###   ########.fr       */
+/*   Updated: 2019/11/05 16:06:27 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-size_t		int_len(int n)
+size_t	int_len(int n)
 {
 	size_t		len;
 
@@ -27,7 +27,7 @@ size_t		int_len(int n)
 
 int		ls_put_error(char *error, char *dir_name, int returns)
 {
-	ft_printf(error, dir_name);
+	ft_printf("ft_ls: %s: %s\n", dir_name, error);
 	return (returns);
 }
 
@@ -53,7 +53,7 @@ int		display_help(void)
 	exit(LS_STATUSOK);
 }
 
-int	unrecognized_option(char *option, size_t len)
+int		unrecognized_option(char *option, size_t len)
 {
 	ft_printf(
 	"ls: unrecognized option '%.*s'\n"
