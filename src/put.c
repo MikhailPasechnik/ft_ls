@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:01:51 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/11 15:34:12 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/11 16:25:36 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void	put_list_file(t_file *f, t_list_layout *l, unsigned int flags)
 	ft_printf("%s ", get_chmod_str(str_chmod, f->stat.st_mode));
 	flags & LSF_G ?
 	ft_printf(
-			"%*lu %-*s %*ld %.12s %s\n",
+			"%*lu %-*s  %*ld %.12s %s\n",
 			l->st_nlink, f->stat.st_nlink, l->gr_name, gr->gr_name,
 			l->st_size, f->stat.st_size,
 			get_time_str(str_time, f->stat.ST_MTIME.tv_sec), f->name) :
 	ft_printf(
-			"%*lu %-*s %-*s %*ld %.12s %s\n",
+			"%*lu %-*s  %-*s  %*ld %.12s %s\n",
 			l->st_nlink, f->stat.st_nlink, l->pw_name, pw->pw_name,
 			l->gr_name, gr->gr_name, l->st_size, f->stat.st_size,
 			get_time_str(str_time, f->stat.ST_MTIME.tv_sec),
