@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 12:35:30 by caellis           #+#    #+#             */
-/*   Updated: 2019/11/11 12:59:38 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/11 14:20:39 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,7 @@ int		list_dir(char *dir_name, unsigned int flags)
 	(flags & LSF_MULTI && !(flags & LSF_D)) || flags & LSF_RR ? ft_printf("%s:\n", dir_name) : (void)0;
 	flags & LSF_L ? ft_printf("total %d\n", layout.st_blocks_sum) : (void)0;
 	list ? put_file_switch(list, &layout, flags) : (void)0;
-	flags & LSF_RR ? ft_putstr("\n") : (void)0;
 	list && flags & LSF_RR ? put_file_recursive(list, flags) : (void)0;
-	//flags & LSF_RR ? (void)0 : ft_putstr("\n");
 	return (1);
 }
 
