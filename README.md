@@ -4,8 +4,6 @@ As simple as listing the files in a directory.
 # Usage
 `$> ls [-RalrtSufgd] [file ...]`
 
-0.64s user 1.64s system 26% cpu 8.624 total
-
 # *TODO*:
 **Main**
 - Basic ls output
