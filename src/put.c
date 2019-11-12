@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:01:51 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/11 16:25:36 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/12 16:27:49 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,29 @@ void	put_list_file(t_file *f, t_list_layout *l, unsigned int flags)
 {
 	char			str_chmod[12];
 	char			str_time[12];
+	char			link[NAME_MAX + 1];
 	struct passwd	*pw;
 	struct group	*gr;
 
-	(void)flags;
 	pw = getpwuid(f->stat.st_uid);
 	gr = getgrgid(f->stat.st_gid);
 	ft_printf("%s ", get_chmod_str(str_chmod, f->stat.st_mode));
+	S_ISLNK(f->stat.st_mode) ? readlink(f->file_name, link, NAME_MAX) : (void)0;
 	flags & LSF_G ?
 	ft_printf(
-			"%*lu %-*s  %*ld %.12s %s\n",
+			"%*lu %-*s  %*ld %.12s %s%s%s\n",
 			l->st_nlink, f->stat.st_nlink, l->gr_name, gr->gr_name,
 			l->st_size, f->stat.st_size,
-			get_time_str(str_time, f->stat.ST_MTIME.tv_sec), f->name) :
+			get_time_str(str_time, f->stat.ST_MTIME.tv_sec), f->name,
+			S_ISLNK(f->stat.st_mode) ? " -> " : "",
+			S_ISLNK(f->stat.st_mode) ? link : "") :
 	ft_printf(
-			"%*lu %-*s  %-*s  %*ld %.12s %s\n",
+			"%*lu %-*s  %-*s  %*ld %.12s %s%s%s\n",
 			l->st_nlink, f->stat.st_nlink, l->pw_name, pw->pw_name,
 			l->gr_name, gr->gr_name, l->st_size, f->stat.st_size,
-			get_time_str(str_time, f->stat.ST_MTIME.tv_sec),
-			f->name);
+			get_time_str(str_time, f->stat.ST_MTIME.tv_sec), f->name,
+			S_ISLNK(f->stat.st_mode) ? " -> " : "",
+			S_ISLNK(f->stat.st_mode) ? link : "");
 }
 
 void	put_file(t_file *f, t_list_layout *l, unsigned int flags)
