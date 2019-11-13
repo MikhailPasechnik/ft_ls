@@ -6,8 +6,7 @@ As simple as listing the files in a directory.
 
 # *TODO*:
 **Main**
-- Basic ls output
-    - [ ] **BUG_FIX_NEEDED** : weird '&' sign appearing on basic output if symbolic link is in directory (see maintest on ls)
+- [ ] Color management of LSCOLORS env-defined colors ('-G' flag)
 - [ ] **Optimize list_sort?**
 - [ ] Clean up memory on finish at put_file_switch()
 - [ ] NORMalize
@@ -15,11 +14,10 @@ As simple as listing the files in a directory.
 **Bonus**
 - [ ] Add ACl parameters and extended attributes to '-l' output
 - [ ] Flag '-u'
-- [ ] Color management of LSCOLORS env-defined colors ('-G' flag)
-
 
 # *Legacy Edits*
 - Basic ls output
+    - [x] **BUG_FIX_NEEDED** : weird '&' sign appearing on basic output if symbolic link is in 
     - [x] Read and output symbolic link reference
     - [x] Update get_dir_files() to drop '.'-files on '-a' flag
     - [x] Update list_dir() to store current terminal width in layout->w
