@@ -62,3 +62,4 @@ cmake-build-*
 /tests/unit_test
 /tests/cirqui_test
 .vscode
+src/.window_size.c
