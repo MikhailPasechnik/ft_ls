@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:39:43 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/13 14:09:51 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/13 15:49:43 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@
 # define LSF_HELP  (1u << 11u)
 # define LSF_MULTI (1u << 12u)
 # define LSF_FILES (1u << 13u)
+# define LSF_ATTY (1u << 14u)
 
 typedef struct	s_list_layout
 {
