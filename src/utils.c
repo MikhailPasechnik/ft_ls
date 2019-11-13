@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:12:35 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/05 16:06:27 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/13 16:37:22 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ size_t	int_len(int n)
 
 int		ls_put_error(char *error, char *dir_name, int returns)
 {
-	ft_printf("ft_ls: %s: %s\n", dir_name, error);
+	ft_fprintf(STDERR_FILENO, "ft_ls: %s: %s\n", dir_name, error);
 	return (returns);
 }
 
@@ -55,7 +55,7 @@ int		display_help(void)
 
 int		unrecognized_option(char *option, size_t len)
 {
-	ft_printf(
+	ft_fprintf(STDERR_FILENO,
 	"ls: unrecognized option '%.*s'\n"
 	"Try 'ft_ls --help' for more information.\n",
 	len, option);

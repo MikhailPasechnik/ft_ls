@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:01:51 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/12 16:27:49 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/13 14:15:05 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,7 @@ void	put_list_file(t_file *f, t_list_layout *l, unsigned int flags)
 	gr = getgrgid(f->stat.st_gid);
 	ft_printf("%s ", get_chmod_str(str_chmod, f->stat.st_mode));
 	S_ISLNK(f->stat.st_mode) ? readlink(f->file_name, link, NAME_MAX) : (void)0;
-	flags & LSF_G ?
-	ft_printf(
-			"%*lu %-*s  %*ld %.12s %s%s%s\n",
-			l->st_nlink, f->stat.st_nlink, l->gr_name, gr->gr_name,
-			l->st_size, f->stat.st_size,
-			get_time_str(str_time, f->stat.ST_MTIME.tv_sec), f->name,
-			S_ISLNK(f->stat.st_mode) ? " -> " : "",
-			S_ISLNK(f->stat.st_mode) ? link : "") :
-	ft_printf(
-			"%*lu %-*s  %-*s  %*ld %.12s %s%s%s\n",
-			l->st_nlink, f->stat.st_nlink, l->pw_name, pw->pw_name,
-			l->gr_name, gr->gr_name, l->st_size, f->stat.st_size,
-			get_time_str(str_time, f->stat.ST_MTIME.tv_sec), f->name,
-			S_ISLNK(f->stat.st_mode) ? " -> " : "",
-			S_ISLNK(f->stat.st_mode) ? link : "");
+	flags & LSF_G ? LS_L_OUT_SHORT : LS_L_OUT_LONG;
 }
 
 void	put_file(t_file *f, t_list_layout *l, unsigned int flags)
@@ -54,20 +40,12 @@ void	put_file(t_file *f, t_list_layout *l, unsigned int flags)
 	i = 0;
 	tmp = out;
 	(void)flags;
-	while (f)
-	{
-		ft_strcpy(files[i], f->name);
-		files[i][NAME_MAX] = '\0';
-		i++;
-		f = f->next;
-	}
-	i = 0;
-	//ft_printf("win width is %lu\nmax_name is..%lu\ncols is..%lu\nrows is..%lu\nnum of files is..%lu\n", l->w.ws_col, l->max_name, l->cols, l->rows, l->n_files);
+	file_to_tab(files, f);
 	offset = 0;
 	while (i < l->rows)
 	{
 		pos = i;
-		while (pos <= l->n_files)
+		while (pos < l->n_files)
 		{
 			offset += ft_sprintf(tmp + offset, "%-*s ", l->max_name, files[pos]);
 			pos += l->rows;
@@ -113,7 +91,6 @@ void put_file_switch(t_file *file, t_list_layout *l, unsigned int flags)
 	{
 		l->cols = l->w.ws_col / (l->max_name + 1) == 0 ? 1 : l->w.ws_col / (l->max_name + 1) - 1;
 		l->rows = l->n_files / l->cols ? l->n_files / l->cols : 1;
-		//ft_printf("win width is %lu\nmax_name is..%lu\ncols is..%lu\nrows is..%lu\nnum of files is..%lu\n", l->w.ws_col, l->max_name, l->cols, l->rows, l->n_files);
 		put_file(file, l, flags);
 	}
 	// Clean up here

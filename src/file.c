@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:12:57 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/07 16:23:31 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/13 14:11:25 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,21 @@ int		new_file(const char dir_name[PATH_MAX],
 	}
 	ft_strcpy((*file)->name, ent->d_name);
 	return (1);
+}
+
+void	file_to_tab(char tab[][NAME_MAX + 1], t_file *f)
+{
+	unsigned short	i;
+
+	i = 0;
+	while (f)
+	{
+		ft_strcpy(tab[i], f->name);
+		tab[i][NAME_MAX] = '\0';
+		i++;
+		f = f->next;
+	}
+	return ;
 }
 
 void	file_iter(t_file *file, t_list_layout *layout, unsigned int flags,
