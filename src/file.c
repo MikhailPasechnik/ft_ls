@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ch3rryhq <ch3rryhq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:12:57 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/13 14:11:25 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/13 19:18:37 by ch3rryhq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,5 @@ void	file_free(t_file **file)
 		free(tmp);
 	}
 	*file = NULL;
+    return ;
 }

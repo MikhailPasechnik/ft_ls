@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ch3rryhq <ch3rryhq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:39:43 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/13 17:12:12 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/13 19:20:35 by ch3rryhq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ int				new_file(const char dir_name[PATH_MAX],
 		const struct dirent *ent, t_file **file);
 void			file_iter(t_file *file, t_list_layout *layout, unsigned int flags,
 		void (*f)(t_file *file, t_list_layout *layout, unsigned int flags));
+void	        file_free(t_file **file);
 void			file_to_tab(char tab[][NAME_MAX + 1], t_file *f);
 
 /*

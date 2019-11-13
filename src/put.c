@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ch3rryhq <ch3rryhq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:01:51 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/13 14:15:05 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/13 19:19:26 by ch3rryhq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,7 @@ void put_file_switch(t_file *file, t_list_layout *l, unsigned int flags)
 		l->rows = l->n_files / l->cols ? l->n_files / l->cols : 1;
 		put_file(file, l, flags);
 	}
-	// Clean up here
+    // Clean up here ?
+	if (!(flags & LSF_RR))
+        file_free(&file);
 }
