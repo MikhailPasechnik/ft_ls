@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:01:51 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/13 14:11:53 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/13 14:15:05 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	put_file(t_file *f, t_list_layout *l, unsigned int flags)
 	while (i < l->rows)
 	{
 		pos = i;
-		while (pos <= l->n_files)
+		while (pos < l->n_files)
 		{
 			offset += ft_sprintf(tmp + offset, "%-*s ", l->max_name, files[pos]);
 			pos += l->rows;
