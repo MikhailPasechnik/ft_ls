@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:39:43 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/08 15:12:24 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/13 14:09:51 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,18 @@
 # define IS_CD(s)(((s)[0] == '.' && (s)[1] == '\0'))
 # define IS_UP(s)(((s)[0] == '.' && (s)[1] == '.' && (s)[2] == '\0'))
 # define IS_DOT(s)(((s)[0] == '.'))
+# define LS_L_OUT_SHORT ft_printf("%*lu %-*s  %*ld %.12s %s%s%s\n",\
+			l->st_nlink, f->stat.st_nlink, l->gr_name, gr->gr_name,\
+			l->st_size, f->stat.st_size,\
+			get_time_str(str_time, f->stat.ST_MTIME.tv_sec), f->name,\
+			S_ISLNK(f->stat.st_mode) ? " -> " : "",\
+			S_ISLNK(f->stat.st_mode) ? link : "")
+# define LS_L_OUT_LONG ft_printf("%*lu %-*s  %-*s  %*ld %.12s %s%s%s\n",\
+			l->st_nlink, f->stat.st_nlink, l->pw_name, pw->pw_name,\
+			l->gr_name, gr->gr_name, l->st_size, f->stat.st_size,\
+			get_time_str(str_time, f->stat.ST_MTIME.tv_sec), f->name,\
+			S_ISLNK(f->stat.st_mode) ? " -> " : "",\
+			S_ISLNK(f->stat.st_mode) ? link : "")
 
 # ifdef __APPLE__
  # define ST_MTIME st_mtimespec
@@ -104,6 +116,8 @@ int				new_file(const char dir_name[PATH_MAX],
 		const struct dirent *ent, t_file **file);
 void			file_iter(t_file *file, t_list_layout *layout, unsigned int flags,
 		void (*f)(t_file *file, t_list_layout *layout, unsigned int flags));
+void			file_to_tab(char tab[][NAME_MAX + 1], t_file *f);
+
 /*
 ** File info
 */
