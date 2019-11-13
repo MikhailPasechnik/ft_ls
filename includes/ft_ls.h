@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:39:43 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/13 15:49:43 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/13 17:12:12 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 # define LS_STATUSOK 0
 # define LS_STATUSMP 1
-# define LS_STATUSST 2
+# define LS_STATUSST 1
 # define LSE_NODIR "ft_ls: %s: No such file or directory\n"
 
 # define MAX(a, b)((a) > (b) ? (a) : (b))
