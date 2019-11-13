@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 12:35:30 by caellis           #+#    #+#             */
-/*   Updated: 2019/11/13 15:19:30 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/13 16:25:45 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		list_dir(char *dir_name, unsigned int flags)
 	if (get_dir_files(dir_name, &list, &layout, flags) != LS_STATUSOK)
 		return (0);
 	flags & LSF_F ? (void)0 : sort_list(&list, flags);
-	(flags & LSF_MULTI && !(flags & LSF_D)) || flags & LSF_RR ? ft_printf("%s:\n", dir_name) : (void)0;
+	(flags & LSF_MULTI && !(flags & LSF_D)) ? ft_printf("%s:\n", dir_name) : (void)0;
 	flags & LSF_L ? ft_printf("total %d\n", layout.st_blocks_sum) : (void)0;
 	list ? put_file_switch(list, &layout, flags) : (void)0;
 	list && flags & LSF_RR ? put_file_recursive(list, flags) : (void)0;
@@ -75,13 +75,14 @@ int main(int argc, char **argv)
 	while (i < argc && argv[i][0] == '-')
 		parse_options(argv[i++], &flags);
 	flags |= (i < argc - 1) ? LSF_MULTI : 0;
+	flags & LSF_MULTI ? ft_printf("multi_now\n") : (void)0;
 	if (i >= argc)
 		list_dir(".", flags);
 	else
 		while (i < argc)
 		{
 			list_dir(argv[i++], flags);
-			ft_putstr("\n");
+			i == argc ? (void)0 : ft_putstr("\n");
 		}
 	return (0);
 }
