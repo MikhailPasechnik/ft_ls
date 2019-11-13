@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bnesoi <bnesoi@student.42.fr>              +#+  +:+       +#+         #
+#    By: ch3rryhq <ch3rryhq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/11 15:11:22 by bnesoi            #+#    #+#              #
-#    Updated: 2019/10/20 19:47:54 by bnesoi           ###   ########.fr        #
+#    Updated: 2019/11/13 19:21:01 by ch3rryhq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME=ft_ls
 
 OS			=	$(shell uname -s)
 CC			=	gcc
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -O3
 
 SRC_FILES	=			\
 	file.c				\
