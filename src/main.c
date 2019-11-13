@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 12:35:30 by caellis           #+#    #+#             */
-/*   Updated: 2019/11/11 14:20:39 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/13 15:19:30 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,12 @@ int main(int argc, char **argv)
 {
 	int				i;
 	unsigned int	flags;
+	struct stat		stat;
 
 	i = 1;
 	flags = 0;
-
+	fstat(STDOUT_FILENO, &stat);
+	S_ISCHR(stat.st_mode) ? (flags |= LSF_ATTY) : (flags |= LSF_1);
 	while (i < argc && argv[i][0] == '-')
 		parse_options(argv[i++], &flags);
 	flags |= (i < argc - 1) ? LSF_MULTI : 0;
