@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ch3rryhq <ch3rryhq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:39:43 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/13 19:20:35 by ch3rryhq         ###   ########.fr       */
+/*   Updated: 2019/11/14 17:31:43 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef struct	s_list_layout
 	size_t			st_rdev_minor;
 	size_t			st_rdev_major;
 	size_t			st_blocks_sum;
-	unsigned short	max_name;
+	unsigned short	maxlen;
 	unsigned short	n_files;
 	unsigned short	cols;
 	unsigned short 	rows;

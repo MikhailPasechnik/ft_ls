@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ch3rryhq <ch3rryhq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:01:51 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/13 19:19:26 by ch3rryhq         ###   ########.fr       */
+/*   Updated: 2019/11/14 18:06:23 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ void	put_list_file(t_file *f, t_list_layout *l, unsigned int flags)
 void	put_file(t_file *f, t_list_layout *l, unsigned int flags)
 {
 	char			files[l->n_files + 1][NAME_MAX + 1];
-	char			out[l->n_files * (l->max_name + 1) + 1];
+	char			out[l->n_files * (l->maxlen + 1) + 1];
 	char			*tmp;
 	unsigned short	i;
 	unsigned short	pos;
 	unsigned short	offset;
 
-	ft_bzero((void *)out, sizeof(l->n_files * (l->max_name + 1) + 1));
+	ft_bzero((void *)out, sizeof(l->n_files * (l->maxlen + 1) + 1));
 	i = 0;
 	tmp = out;
 	(void)flags;
@@ -47,7 +47,7 @@ void	put_file(t_file *f, t_list_layout *l, unsigned int flags)
 		pos = i;
 		while (pos < l->n_files)
 		{
-			offset += ft_sprintf(tmp + offset, "%-*s ", l->max_name, files[pos]);
+			offset += ft_sprintf(tmp + offset, "%-*s ", l->maxlen, files[pos]);
 			pos += l->rows;
 		}
 		
@@ -75,7 +75,7 @@ void	put_file_recursive(t_file *file, unsigned int flags)
 	}
 }
 
-void put_file_switch(t_file *file, t_list_layout *l, unsigned int flags)
+void	put_file_switch(t_file *file, t_list_layout *l, unsigned int flags)
 {
 	if (flags & LSF_L)
 		file_iter(file, l, flags, put_list_file);
@@ -89,7 +89,7 @@ void put_file_switch(t_file *file, t_list_layout *l, unsigned int flags)
 	}
 	else
 	{
-		l->cols = l->w.ws_col / (l->max_name + 1) == 0 ? 1 : l->w.ws_col / (l->max_name + 1) - 1;
+		l->cols = l->w.ws_col / (l->maxlen + 1) == 0 ? 1 : l->w.ws_col / (l->maxlen + 1) - 1;
 		l->rows = l->n_files / l->cols ? l->n_files / l->cols : 1;
 		put_file(file, l, flags);
 	}
