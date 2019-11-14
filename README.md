@@ -8,7 +8,6 @@ As simple as listing the files in a directory.
 **Main**
 - [ ] Color management of LSCOLORS env-defined colors ('-G' flag)
 - [ ] **Optimize list_sort?**
-- [ ] Clean up memory on finish at put_file_switch()
 - [ ] NORMalize
 
 **Bonus**
@@ -40,6 +39,7 @@ As simple as listing the files in a directory.
     - [x] Flag '-g' (ommit owner)
     - [x] Flag '-d'
         - [x] Fix newlines / spaces (should be auto-fixed on basic ls output)
+- [X] Clean up memory on finish at put_file_switch()
 
 # Limitations
 Allowed standard functions:
