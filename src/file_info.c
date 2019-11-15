@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_info.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnesoi <bnesoi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:13:50 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/10/20 19:46:21 by bnesoi           ###   ########.fr       */
+/*   Updated: 2019/11/15 14:31:01 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static inline char	get_type_char(mode_t mode)
 
 	type = '-';
 	mode = mode & S_IFMT;
-
 	if (S_ISREG(mode))
 		type = '-';
 	else if (S_ISDIR(mode))
@@ -54,8 +53,7 @@ inline char			*get_chmod_str(char *str, mode_t mode)
 	str[9] = (mode & S_IXOTH) ? 'x' : '-';
 	if (S_ISVTX & mode)
 		str[9] = 't' - 32 * (str[9] == '-');
-
-	str[10] = ' ';  // TODO: get file acl: "@" or "+" or " "
+	str[10] = ' ';
 	str[11] = '\0';
 	return (str);
 }
