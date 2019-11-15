@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:02:18 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/07 17:12:53 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/15 14:36:26 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ static void		bubble_sort(t_file **list, int (*cmp)(t_file *, t_file *))
 	}
 }
 
-void	sort_list(t_file **list, unsigned int flags)
+void			sort_list(t_file **list, unsigned int flags)
 {
 	if (*list)
 	{
