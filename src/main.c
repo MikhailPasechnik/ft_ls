@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ch3rryhq <ch3rryhq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 12:35:30 by caellis           #+#    #+#             */
-/*   Updated: 2019/11/13 19:34:54 by ch3rryhq         ###   ########.fr       */
+/*   Updated: 2019/11/15 13:09:19 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ int main(int argc, char **argv)
 	while (i < argc && argv[i][0] == '-')
 		parse_options(argv[i++], &flags);
 	flags |= (i < argc - 1) ? LSF_MULTI : 0;
-	flags & LSF_MULTI ? ft_printf("multi_now\n") : (void)0;
 	if (i >= argc)
 		list_dir(".", flags);
 	else
