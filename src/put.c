@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:01:51 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/15 14:10:13 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/15 15:27:37 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,20 @@ void	put_list_file(t_file *f, t_list_layout *l, unsigned int flags)
 	gr = getgrgid(f->stat.st_gid);
 	ft_printf("%s ", get_chmod_str(str_chmod, f->stat.st_mode));
 	S_ISLNK(f->stat.st_mode) ? readlink(f->file_name, link, NAME_MAX) : (void)0;
-	flags & LSF_G ? LS_L_OUT_SHORT : LS_L_OUT_LONG;
+	if (flags & LSF_G)
+		ft_printf("%*lu %-*s  %*ld %.12s %s%s%s\n",\
+			l->st_nlink, f->stat.st_nlink, l->gr_name, gr->gr_name,\
+			l->st_size, f->stat.st_size,\
+			get_time_str(str_time, f->stat.ST_MTIME.tv_sec), f->name,\
+			S_ISLNK(f->stat.st_mode) ? " -> " : "",\
+			S_ISLNK(f->stat.st_mode) ? link : "");
+	else
+		ft_printf("%*lu %-*s  %-*s  %*ld %.12s %s%s%s\n",\
+			l->st_nlink, f->stat.st_nlink, l->pw_name, pw->pw_name,\
+			l->gr_name, gr->gr_name, l->st_size, f->stat.st_size,\
+			get_time_str(str_time, f->stat.ST_MTIME.tv_sec), f->name,\
+			S_ISLNK(f->stat.st_mode) ? " -> " : "",\
+			S_ISLNK(f->stat.st_mode) ? link : "");
 }
 
 void	put_file(t_file *f, t_list_layout *l, unsigned int flags)
@@ -50,7 +63,6 @@ void	put_file(t_file *f, t_list_layout *l, unsigned int flags)
 			offset += ft_sprintf(tmp + offset, "%-*s ", l->maxlen, files[pos]);
 			pos += l->rows;
 		}
-		
 		ft_strcpy(tmp + offset, "\n");
 		offset++;
 		i++;
@@ -93,7 +105,6 @@ void	put_file_switch(t_file *file, t_list_layout *l, unsigned int flags)
 		l->rows = l->n_files / l->cols ? l->n_files / l->cols : 1;
 		put_file(file, l, flags);
 	}
-    // Clean up here ?
 	if (!(flags & LSF_RR))
-        file_free(&file);
+		file_free(&file);
 }

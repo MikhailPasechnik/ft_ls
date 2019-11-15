@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:39:43 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/15 14:34:25 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/15 15:32:09 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,11 @@
 # define IS_CD(s)(((s)[0] == '.' && (s)[1] == '\0'))
 # define IS_UP(s)(((s)[0] == '.' && (s)[1] == '.' && (s)[2] == '\0'))
 # define IS_DOT(s)(((s)[0] == '.'))
-# define LS_L_OUT_SHORT ft_printf("%*lu %-*s  %*ld %.12s %s%s%s\n",\
-			l->st_nlink, f->stat.st_nlink, l->gr_name, gr->gr_name,\
-			l->st_size, f->stat.st_size,\
-			get_time_str(str_time, f->stat.ST_MTIME.tv_sec), f->name,\
-			S_ISLNK(f->stat.st_mode) ? " -> " : "",\
-			S_ISLNK(f->stat.st_mode) ? link : "")
-# define LS_L_OUT_LONG ft_printf("%*lu %-*s  %-*s  %*ld %.12s %s%s%s\n",\
-			l->st_nlink, f->stat.st_nlink, l->pw_name, pw->pw_name,\
-			l->gr_name, gr->gr_name, l->st_size, f->stat.st_size,\
-			get_time_str(str_time, f->stat.ST_MTIME.tv_sec), f->name,\
-			S_ISLNK(f->stat.st_mode) ? " -> " : "",\
-			S_ISLNK(f->stat.st_mode) ? link : "")
 
 # ifdef __APPLE__
- # define ST_MTIME st_mtimespec
+#  define ST_MTIME st_mtimespec
 # else
- # define ST_MTIME st_mtim
+#  define ST_MTIME st_mtim
 # endif
 
 /*
@@ -91,7 +79,7 @@ typedef struct	s_list_layout
 	unsigned short	maxlen;
 	unsigned short	n_files;
 	unsigned short	cols;
-	unsigned short 	rows;
+	unsigned short	rows;
 	struct winsize	w;
 }				t_list_layout;
 
@@ -108,16 +96,17 @@ struct			s_file
 /*
 ** List dir function
 */
-int		list_dir(char *dir_name, unsigned int flags);
+int				list_dir(char *dir_name, unsigned int flags);
 
 /*
 ** File struct functions
 */
 int				new_file(const char dir_name[PATH_MAX],
 		const struct dirent *ent, t_file **file);
-void			file_iter(t_file *file, t_list_layout *layout, unsigned int flags,
-		void (*f)(t_file *file, t_list_layout *layout, unsigned int flags));
-void	        file_free(t_file **file);
+void			file_iter(t_file *file, t_list_layout *layout,
+		unsigned int flags, void (*f)(t_file *file, t_list_layout *layout,
+		unsigned int flags));
+void			file_free(t_file **file);
 void			file_to_tab(char tab[][NAME_MAX + 1], t_file *f);
 
 /*
@@ -147,7 +136,7 @@ void			put_list_file(t_file *f, t_list_layout *l,
 void			put_file(t_file *f, t_list_layout *l,
 							unsigned int flags);
 void			put_file_recursive(t_file *file, unsigned int flags);
-void 			put_file_switch(t_file *file, t_list_layout *l,
+void			put_file_switch(t_file *file, t_list_layout *l,
 		unsigned int flags);
 /*
 ** Parse
