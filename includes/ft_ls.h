@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:39:43 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/15 15:32:09 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/15 15:35:36 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,5 +147,8 @@ int				parse_options(char *options, unsigned int *flags);
 ** Sort
 */
 void			sort_list(t_file **list, unsigned int flags);
+int				name_cmp(t_file *a, t_file *b);
+int				size_cmp(t_file *a, t_file *b);
+int				time_cmp(t_file *a, t_file *b);
 
 #endif
