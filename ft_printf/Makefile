@@ -6,7 +6,7 @@
 #    By: caellis <caellis@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/11 15:11:22 by bnesoi            #+#    #+#              #
-#    Updated: 2019/11/14 17:04:57 by caellis          ###   ########.fr        #
+#    Updated: 2019/08/23 13:27:56 by caellis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ OBJ=$(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 SRC=$(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
 CC=gcc
-CC_FLAGS= -Wall -Wextra -Werror -O3
+CC_FLAGS= -Wall -Wextra -Werror
 
 all: $(NAME)
 
