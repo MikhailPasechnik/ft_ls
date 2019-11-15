@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:01:51 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/15 14:34:05 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/15 14:10:13 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	put_file_switch(t_file *file, t_list_layout *l, unsigned int flags)
 	}
 	else
 	{
-		l->cols = l->w.ws_col / (l->maxlen + 1) == 0 ? 1 : l->w.ws_col / (l->maxlen + 1) ;
+		l->cols = l->w.ws_col / (l->maxlen + 1) == 0 ? 1 : l->w.ws_col / (l->maxlen + 1);
 		l->rows = l->n_files / l->cols ? l->n_files / l->cols : 1;
 		put_file(file, l, flags);
 	}
