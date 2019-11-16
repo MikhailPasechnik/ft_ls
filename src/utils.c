@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:12:35 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/13 16:37:22 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/16 14:45:19 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,6 @@ int		display_help(void)
 	"  -a      do not ignore entries starting with .\n"
 	"  -r      reverse order while sorting\n"
 	"  -t      sort by modification time, newest first\n"
-	"  -u      with -lt: sort by, and show, access time;\n"
-	"            with -l: show access time and sort by name;\n"
-	"            otherwise: sort by access time, newest first\n"
 	"  -f      do not sort\n"
 	"  -g      like -l, but do not list owner\n"
 	"  -d      list directories themselves, not their contents\n"

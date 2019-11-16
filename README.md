@@ -2,17 +2,18 @@
 As simple as listing the files in a directory.
 
 # Usage
-`$> ls [-RalrtSufgd] [file ...]`
+`$> ls [-RalrtSfgd] [file ...]`
 
 # *TODO*:
-**Main**
-- [ ] Color management of LSCOLORS env-defined colors ('-G' flag)
-- [ ] **Optimize list_sort?**
-- [ ] NORMalize
 
-**Bonus**
+**Bonuses**
+- [x] '-S' flag (sort by size)
+- [x] Flag '-f' (do not sort), '-g' (ommit owner), '-d' (just dir)
+- [x] Auto basic output (no flag)
+- [x] Auto '-1' flag on non-terminal output
 - [ ] Add ACl parameters and extended attributes to '-l' output
-- [ ] Flag '-u'
+- [ ] Color management of LSCOLORS env-defined colors ('-G' flag)
+
 
 # *Legacy Edits*
 - Basic ls output
@@ -38,8 +39,9 @@ As simple as listing the files in a directory.
     - [x] Flag '-f'
     - [x] Flag '-g' (ommit owner)
     - [x] Flag '-d'
-        - [x] Fix newlines / spaces (should be auto-fixed on basic ls output)
+- [x] Fix newlines / spaces on '-d' flag (should be auto-fixed on basic ls output)
 - [X] Clean up memory on finish at put_file_switch()
+- [x] NORMalize
 
 # Limitations
 Allowed standard functions:
