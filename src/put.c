@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:01:51 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/16 13:15:48 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/16 14:25:52 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static void	tab_printer(char tab[][NAME_MAX + 1], char *out, t_list_layout *l)
 		}
 		ft_strcpy(out + offset++, "\n");
 	}
+	*(out + offset) = '\0';
 	ft_putstr(out);
 }
 
@@ -73,7 +74,7 @@ static void	put_file(t_file *f, t_list_layout *l, unsigned int flags)
 	(void)flags;
 }
 
-void		put_file_recursive(t_file *file, unsigned int flags)
+void		put_file_recursive(t_file *file, unsigned int *flags)
 {
 	t_file	*tmp;
 
@@ -82,8 +83,9 @@ void		put_file_recursive(t_file *file, unsigned int flags)
 		if (S_ISDIR(file->stat.st_mode) &&
 			!IS_CD(file->name) && !IS_UP(file->name))
 		{
+			(*flags) |= LSF_DIRS;
 			ft_putstr("\n");
-			list_dir(file->file_name, flags);
+			list_dir(file->file_name, *flags);
 		}
 		tmp = file;
 		file = file->next;
