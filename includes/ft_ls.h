@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:39:43 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/16 13:14:21 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/16 14:25:30 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@
 # define LSF_MULTI (1u << 12u)
 # define LSF_FILES (1u << 13u)
 # define LSF_ATTY (1u << 14u)
+# define LSF_DIRS (1u << 15u)
 
 typedef struct	s_list_layout
 {
@@ -131,7 +132,7 @@ int				unrecognized_option(char *option, size_t len);
 /*
 ** Print functions
 */
-void			put_file_recursive(t_file *file, unsigned int flags);
+void			put_file_recursive(t_file *file, unsigned int *flags);
 void			put_file_switch(t_file *file, t_list_layout *l,
 		unsigned int flags);
 /*
