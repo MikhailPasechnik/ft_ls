@@ -134,6 +134,7 @@ int				unrecognized_option(char *option, size_t len);
 void			put_file_recursive(t_file *file, unsigned int *flags);
 void			put_file_switch(t_file *file, t_list_layout *l,
 		unsigned int flags);
+void			put_list_file(t_file *f, t_list_layout *l, unsigned int flags);
 /*
 ** Parse
 */

@@ -22,6 +22,7 @@ SRC_FILES	=			\
 	main.c				\
 	parse.c				\
 	put.c				\
+	put_list_file.c		\
 	sort.c				\
 	utils.c				\
 	sort_utils.c
