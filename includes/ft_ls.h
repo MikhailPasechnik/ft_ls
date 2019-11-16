@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:39:43 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/16 14:25:30 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/16 14:46:02 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,23 +49,22 @@
 ** Flags
 ** NOTE: It is important to keep LSF_ALL order and LSF_* flags order the same
 */
-# define LSF_ALL   "lRartSufgd1"
+# define LSF_ALL   "lRartSfgd1"
 # define LSF_L     (1u << 0u)
 # define LSF_RR    (1u << 1u)
 # define LSF_A     (1u << 2u)
 # define LSF_R     (1u << 3u)
 # define LSF_T     (1u << 4u)
 # define LSF_S     (1u << 5u)
-# define LSF_U     (1u << 6u)
-# define LSF_F     (1u << 7u)
-# define LSF_G     (1u << 8u)
-# define LSF_D     (1u << 9u)
-# define LSF_1     (1u << 10u)
-# define LSF_HELP  (1u << 11u)
-# define LSF_MULTI (1u << 12u)
-# define LSF_FILES (1u << 13u)
-# define LSF_ATTY (1u << 14u)
-# define LSF_DIRS (1u << 15u)
+# define LSF_F     (1u << 6u)
+# define LSF_G     (1u << 7u)
+# define LSF_D     (1u << 8u)
+# define LSF_1     (1u << 9u)
+# define LSF_HELP  (1u << 10u)
+# define LSF_MULTI (1u << 11u)
+# define LSF_FILES (1u << 12u)
+# define LSF_ATTY (1u << 13u)
+# define LSF_DIRS (1u << 14u)
 
 typedef struct	s_list_layout
 {
