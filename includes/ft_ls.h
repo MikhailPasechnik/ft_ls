@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:39:43 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/15 15:35:36 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/16 13:14:21 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,10 +131,6 @@ int				unrecognized_option(char *option, size_t len);
 /*
 ** Print functions
 */
-void			put_list_file(t_file *f, t_list_layout *l,
-							unsigned int flags);
-void			put_file(t_file *f, t_list_layout *l,
-							unsigned int flags);
 void			put_file_recursive(t_file *file, unsigned int flags);
 void			put_file_switch(t_file *file, t_list_layout *l,
 		unsigned int flags);
