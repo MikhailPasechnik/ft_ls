@@ -6,14 +6,14 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:12:57 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/15 12:19:30 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/13 14:11:25 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 int		new_file(const char dir_name[PATH_MAX],
-			const struct dirent *ent, t_file **file)
+	const struct dirent *ent, t_file **file)
 {
 	if (!(*file = (t_file *)ft_memalloc(sizeof(t_file))))
 		return (0);
@@ -43,7 +43,7 @@ void	file_to_tab(char tab[][NAME_MAX + 1], t_file *f)
 }
 
 void	file_iter(t_file *file, t_list_layout *layout, unsigned int flags,
-			void (*f)(t_file *file, t_list_layout *layout, unsigned int flags))
+				void (*f)(t_file *file, t_list_layout *layout, unsigned int flags))
 {
 	while (file && f)
 	{
@@ -63,5 +63,4 @@ void	file_free(t_file **file)
 		free(tmp);
 	}
 	*file = NULL;
-	return ;
 }

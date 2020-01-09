@@ -6,7 +6,7 @@
 /*   By: caellis <caellis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 19:12:35 by bnesoi            #+#    #+#             */
-/*   Updated: 2019/11/16 14:49:39 by caellis          ###   ########.fr       */
+/*   Updated: 2019/11/13 16:37:22 by caellis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		ls_put_error(char *error, char *dir_name, int returns)
 int		display_help(void)
 {
 	ft_printf(
-	"Usage: ft_ls [-RalrtSfgd]... [FILE]...\n"
+	"Usage: ft_ls [OPTION]... [FILE]...\n"
 	"List information about the FILEs (the current directory by default).\n"
 	"Sort entries alphabetically if none of -tu nor --sort is specified.\n\n"
 	"  -l      use a long listing format\n"
@@ -42,6 +42,9 @@ int		display_help(void)
 	"  -a      do not ignore entries starting with .\n"
 	"  -r      reverse order while sorting\n"
 	"  -t      sort by modification time, newest first\n"
+	"  -u      with -lt: sort by, and show, access time;\n"
+	"            with -l: show access time and sort by name;\n"
+	"            otherwise: sort by access time, newest first\n"
 	"  -f      do not sort\n"
 	"  -g      like -l, but do not list owner\n"
 	"  -d      list directories themselves, not their contents\n"

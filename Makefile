@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: caellis <caellis@student.42.fr>            +#+  +:+       +#+         #
+#    By: bnesoi <bnesoi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/11 15:11:22 by bnesoi            #+#    #+#              #
-#    Updated: 2019/11/15 15:37:11 by caellis          ###   ########.fr        #
+#    Updated: 2019/10/20 19:47:54 by bnesoi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME=ft_ls
 
 OS			=	$(shell uname -s)
 CC			=	gcc
-CFLAGS		=	-Wall -Wextra -Werror -O3
+CFLAGS		=	-Wall -Wextra -Werror
 
 SRC_FILES	=			\
 	file.c				\
@@ -23,8 +23,7 @@ SRC_FILES	=			\
 	parse.c				\
 	put.c				\
 	sort.c				\
-	utils.c				\
-	sort_utils.c
+	utils.c	
 
 HDR_FILES	=			\
 	ft_ls.h
